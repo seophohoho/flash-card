@@ -30,7 +30,7 @@ export function renderRichText(parent, text) {
   }
 }
 
-export function renderCard(container, question, onToggle) {
+export function renderCard(container, question, onToggle, startOpen = false) {
   container.replaceChildren();
 
   const label = el("div", "type");
@@ -78,8 +78,8 @@ export function renderCard(container, question, onToggle) {
   }
   container.appendChild(answer);
 
-  toggle.addEventListener("click", () => {
-    const open = answer.classList.toggle("open");
+  const setOpen = (open) => {
+    answer.classList.toggle("open", open);
     toggle.textContent = open ? "▲ 접기" : "▼ 펼치기";
     toggle.setAttribute("aria-expanded", String(open));
     for (const item of choiceEls) {
@@ -87,6 +87,12 @@ export function renderCard(container, question, onToggle) {
         item.classList.toggle("shown", open);
       }
     }
+  };
+
+  toggle.addEventListener("click", () => {
+    setOpen(!answer.classList.contains("open"));
     if (onToggle) onToggle();
   });
+
+  if (startOpen) setOpen(true);
 }

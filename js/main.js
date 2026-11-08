@@ -19,16 +19,19 @@ const g1El = document.getElementById("g1");
 const g2El = document.getElementById("g2");
 const progressEl = document.getElementById("progress");
 const hintEl = document.getElementById("hint");
+const autoExpandEl = document.getElementById("auto-expand");
 const errorEl = document.getElementById("error");
 
 let deck = null;
 let busy = false;
+let autoExpand = false;
 
 function showError(message) {
   stageEl.hidden = true;
   filtersEl.hidden = true;
   progressEl.hidden = true;
   hintEl.hidden = true;
+  autoExpandEl.hidden = true;
   errorEl.textContent = message;
   errorEl.hidden = false;
 }
@@ -38,7 +41,7 @@ function fit() {
 }
 
 function renderCurrent() {
-  renderCard(cardEl, deck.current(), fit);
+  renderCard(cardEl, deck.current(), fit, autoExpand);
   g1El.classList.toggle("hidden", deck.remaining() < 1);
   g2El.classList.toggle("hidden", deck.remaining() < 2);
   fit();
@@ -64,6 +67,15 @@ function renderFilters() {
     });
     filtersEl.appendChild(button);
   }
+}
+
+function toggleAutoExpand() {
+  autoExpandEl.blur();
+  if (busy) return;
+  autoExpand = !autoExpand;
+  autoExpandEl.setAttribute("aria-pressed", String(autoExpand));
+  autoExpandEl.textContent = autoExpand ? "항상 펼치기: ON" : "항상 펼치기: OFF";
+  if (autoExpand) renderCurrent();
 }
 
 function renderProgress() {
@@ -106,6 +118,7 @@ async function boot() {
   }
   renderAll();
   bindInput(stageEl, navigate);
+  autoExpandEl.addEventListener("click", toggleAutoExpand);
   window.addEventListener("resize", fit);
   window.addEventListener("orientationchange", fit);
 }

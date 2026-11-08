@@ -217,6 +217,27 @@ pre code {
   color: #8a7a55;
 }
 
+#auto-expand {
+  position: fixed;
+  left: 16px;
+  bottom: max(calc(6vh - 8px), 24px);
+  z-index: 40;
+  border: 1.5px solid #cfc6b0;
+  background: #fff;
+  color: #555;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+#auto-expand[aria-pressed="true"] {
+  background: #2f9e6e;
+  border-color: #2f9e6e;
+  color: #fff;
+}
+
 #hint {
   position: fixed;
   bottom: 6px;
