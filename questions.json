@@ -1,0 +1,110 @@
+[
+  {
+    "type": "multiple",
+    "question": "HTTP 상태 코드 중 \"찾을 수 없음\"을 뜻하는 것은?",
+    "choices": [
+      "200",
+      "404",
+      "500",
+      "301"
+    ],
+    "answer": 1,
+    "explanation": "요청한 주소에 자원이 없을 때 서버가 돌려주는 코드."
+  },
+  {
+    "type": "short",
+    "question": "HTTP에서 \"데이터 조회\"에 쓰는 메서드는?",
+    "answer": "GET",
+    "explanation": "서버에서 자원을 읽기만 할 때 쓴다."
+  },
+  {
+    "type": "essay",
+    "question": "REST API가 무엇인지 설명하시오.",
+    "answer": "자원(URL)을 HTTP 메서드(GET·POST·PUT·DELETE)로 다루는 방식의 API 설계 스타일.",
+    "explanation": ""
+  },
+  {
+    "type": "multiple",
+    "question": "다음 중 관계형 데이터베이스(RDB)가 아닌 것은?",
+    "choices": [
+      "MySQL",
+      "PostgreSQL",
+      "Redis",
+      "Oracle"
+    ],
+    "answer": 2,
+    "explanation": "Redis는 키-값 저장소(NoSQL)다."
+  },
+  {
+    "type": "short",
+    "question": "서버 요청이 몰릴 때 일부러 처리 속도를 늦춰 서버를 지키는 기법은?",
+    "answer": "쓰로틀링(throttling)",
+    "explanation": ""
+  },
+  {
+    "type": "essay",
+    "question": "트랜잭션(transaction)의 ACID 네 가지를 설명하시오.",
+    "answer": "원자성, 일관성, 격리성, 지속성.",
+    "explanation": ""
+  },
+  {
+    "type": "multiple",
+    "question": "SQL에서 조건에 맞는 행만 걸러 내는 절은?",
+    "choices": [
+      "`SELECT`",
+      "`WHERE`",
+      "`ORDER BY`",
+      "`GROUP BY`"
+    ],
+    "answer": 1,
+    "explanation": "`WHERE`는 조건, `SELECT`는 가져올 열을 정한다."
+  },
+  {
+    "type": "multiple",
+    "question": "캐시(cache)를 두는 가장 큰 이유로 알맞은 것은?",
+    "choices": [
+      "서버의 보안을 높이기 위해서",
+      "자주 쓰는 데이터를 가까운 곳에 두어 응답 속도를 높이고 원본 서버의 부담을 줄이기 위해서, 그리고 같은 요청이 반복될 때 불필요한 계산과 네트워크 이동을 피하기 위해서",
+      "데이터를 영구히 보관하기 위해서",
+      "사용자 인증을 대신하기 위해서"
+    ],
+    "answer": 1,
+    "explanation": "캐시는 속도와 부하를 맞바꾸는 장치다."
+  },
+  {
+    "type": "short",
+    "question": "users 테이블에서 나이가 20 이상인 사용자의 이름을 조회하는 SQL을 쓰시오.",
+    "answer": "```\nSELECT name FROM users WHERE age >= 20;\n```",
+    "explanation": "`WHERE`로 행을 거르고 `SELECT`로 열을 고른다."
+  },
+  {
+    "type": "essay",
+    "question": "프로세스(process)와 스레드(thread)의 차이를 설명하시오.",
+    "answer": "프로세스는 운영체제로부터 독립된 메모리 공간(코드, 데이터, 힙, 스택)을 할당받아 실행 중인 프로그램의 단위이고, 스레드는 그 프로세스 안에서 실제로 CPU를 사용해 일하는 실행 흐름의 단위다. 한 프로세스 안의 스레드들은 코드, 데이터, 힙 영역을 함께 쓰고 스택과 레지스터만 따로 가진다. 그래서 스레드 사이의 통신은 같은 메모리를 읽고 쓰는 것만으로 빠르게 이루어지지만, 같은 자료를 동시에 고치면 경합(race condition)이 생겨 데이터 정합성이 깨질 수 있어 락(lock) 같은 동기화 장치가 필요하다. 반대로 프로세스끼리는 메모리가 분리되어 있어 서로 영향을 주지 않아 안전하지만, 데이터를 주고받으려면 파이프, 소켓, 공유 메모리 같은 프로세스 간 통신(IPC)을 거쳐야 하므로 느리다. 또 프로세스를 새로 만들거나 전환하는 비용은 스레드보다 훨씬 크다. 웹 서버처럼 요청이 많은 프로그램은 이 둘을 섞어 프로세스 여러 개 안에 스레드 여러 개를 두는 방식으로 균형을 맞추기도 한다. 따라서 안정성과 격리가 중요하면 프로세스를, 가볍고 빠른 협업이 중요하면 스레드를 쓴다.",
+    "explanation": ""
+  },
+  {
+    "type": "short",
+    "question": "화면에 <b>bold</b> 라고 적힌 글은 굵은 글씨로 보여야 할까, 태그 글자 그대로 보여야 할까?",
+    "answer": "태그 글자 그대로 보여야 한다.",
+    "explanation": "이 사이트는 글에 든 HTML을 해석하지 않는다."
+  },
+  {
+    "type": "short",
+    "question": "HTTP 응답에서 캐시 유효 시간을 지정하는 헤더는?",
+    "answer": "Cache-Control",
+    "explanation": "참고 문서: https://developer.mozilla.org/ko/docs/Web/HTTP/Guides/Caching/validators-and-conditional-requests/etag-and-headers-guide"
+  },
+  {
+    "type": "multiple",
+    "question": "다음 중 HTTP 메서드가 아닌 것은?",
+    "choices": [
+      "GET",
+      "POST",
+      "FETCH",
+      "DELETE"
+    ],
+    "answer": 2,
+    "explanation": "`fetch`는 브라우저의 자바스크립트 함수이고 HTTP 메서드가 아니다."
+  }
+]
