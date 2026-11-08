@@ -18,6 +18,7 @@ const cardEl = document.getElementById("card");
 const g1El = document.getElementById("g1");
 const g2El = document.getElementById("g2");
 const progressEl = document.getElementById("progress");
+const hintEl = document.getElementById("hint");
 const errorEl = document.getElementById("error");
 
 let deck = null;
@@ -27,6 +28,7 @@ function showError(message) {
   stageEl.hidden = true;
   filtersEl.hidden = true;
   progressEl.hidden = true;
+  hintEl.hidden = true;
   errorEl.textContent = message;
   errorEl.hidden = false;
 }
