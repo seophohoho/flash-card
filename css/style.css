@@ -99,8 +99,12 @@ body {
   border-radius: 1.25em;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.14);
   padding: 2em 2.25em;
-  font-size: 1rem;
+  font-size: calc(1rem * var(--scale, 1));
   overflow-wrap: anywhere;
+}
+
+.card.scrollable {
+  overflow-y: auto;
 }
 
 .type {
@@ -231,7 +235,7 @@ pre code {
 
 @media (max-width: 600px) {
   #stage {
-    padding: 18vh 7vw 14vh;
+    padding: 18vh 7vw;
   }
 
   .card {

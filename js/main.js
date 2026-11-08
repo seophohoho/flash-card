@@ -3,6 +3,7 @@ import { createDeck } from "./deck.js";
 import { renderCard } from "./render.js";
 import { bindInput } from "./input.js";
 import { playTransition } from "./animate.js";
+import { fitCard, getAvailableHeight } from "./fit.js";
 
 const FILTERS = [
   ["all", "전체"],
@@ -30,10 +31,15 @@ function showError(message) {
   errorEl.hidden = false;
 }
 
+function fit() {
+  fitCard(cardEl, getAvailableHeight(stageEl));
+}
+
 function renderCurrent() {
-  renderCard(cardEl, deck.current(), () => {});
+  renderCard(cardEl, deck.current(), fit);
   g1El.classList.toggle("hidden", deck.remaining() < 1);
   g2El.classList.toggle("hidden", deck.remaining() < 2);
+  fit();
 }
 
 function renderFilters() {
@@ -96,6 +102,8 @@ async function boot() {
   }
   renderAll();
   bindInput(stageEl, navigate);
+  window.addEventListener("resize", fit);
+  window.addEventListener("orientationchange", fit);
 }
 
 boot();
