@@ -23,3 +23,10 @@ node --test
 ## 문제 파일
 
 `questions.json`의 모양과 규칙은 [questions-format.md](questions-format.md)를 본다.
+
+## 배포
+
+- 저장소: https://github.com/seophohoho/flash-card
+- 배포 주소: https://flash-card-alpha-eight.vercel.app
+- `main`에 push하면 Vercel이 자동으로 배포한다. 빌드 단계는 없다.
+- 배포 상태는 `npx vercel ls` 또는 Vercel 대시보드에서 본다.
