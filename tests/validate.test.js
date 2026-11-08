@@ -61,6 +61,19 @@ test("question이 비어 있으면 건너뛴다", () => {
   assert.equal(parseQuestions([{ ...short, question: "  " }]).skipped, 1);
 });
 
+test("해설 끝의 출처 줄은 source로 옮기고 해설에서 뺀다", () => {
+  const { questions } = parseQuestions([
+    { ...short, explanation: "본문\n\n출처: a.pdf p.3" },
+    { ...multiple, explanation: "출처: b.pdf p.1~2" },
+    short,
+  ]);
+  assert.equal(questions[0].explanation, "본문");
+  assert.equal(questions[0].source, "a.pdf p.3");
+  assert.equal(questions[1].explanation, "");
+  assert.equal(questions[1].source, "b.pdf p.1~2");
+  assert.equal(questions[2].source, null);
+});
+
 test("샘플 questions.json은 전부 통과하고 세 유형을 모두 가진다", () => {
   const raw = JSON.parse(
     readFileSync(new URL("../questions.json", import.meta.url), "utf8"),

@@ -33,9 +33,16 @@ export function renderRichText(parent, text) {
 export function renderCard(container, question, onToggle, startOpen = false) {
   container.replaceChildren();
 
+  const head = el("div", "card-head");
   const label = el("div", "type");
   label.textContent = TYPE_LABELS[question.type];
-  container.appendChild(label);
+  head.appendChild(label);
+  if (question.source) {
+    const source = el("div", "source");
+    source.textContent = `출처: ${question.source}`;
+    head.appendChild(source);
+  }
+  container.appendChild(head);
 
   const q = el("div", "q");
   renderRichText(q, question.question);

@@ -1,3 +1,5 @@
+import { extractSource } from "./source.js";
+
 const TYPES = ["multiple", "short", "essay"];
 
 function isNonEmptyString(value) {
@@ -9,7 +11,9 @@ function normalize(item) {
   if (!TYPES.includes(item.type)) return null;
   if (!isNonEmptyString(item.question)) return null;
 
-  const explanation = typeof item.explanation === "string" ? item.explanation : "";
+  const { explanation, source } = extractSource(
+    typeof item.explanation === "string" ? item.explanation : "",
+  );
 
   if (item.type === "multiple") {
     const { choices, answer } = item;
@@ -24,6 +28,7 @@ function normalize(item) {
       choices: [...choices],
       answer,
       explanation,
+      source,
     };
   }
 
@@ -33,6 +38,7 @@ function normalize(item) {
     question: item.question,
     answer: item.answer,
     explanation,
+    source,
   };
 }
 

@@ -107,12 +107,27 @@ body {
   overflow-y: auto;
 }
 
+.card-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.25em 0.75em;
+  margin-bottom: 0.8333em;
+}
+
 .type {
   font-size: 0.75em;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: #8a7a55;
-  margin-bottom: 0.8333em;
+}
+
+.source {
+  margin-left: auto;
+  font-size: 0.6875em;
+  color: #a39a85;
+  text-align: right;
 }
 
 .q {
