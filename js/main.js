@@ -2,6 +2,7 @@ import { parseQuestions } from "./validate.js";
 import { createDeck } from "./deck.js";
 import { renderCard } from "./render.js";
 import { bindInput } from "./input.js";
+import { playTransition } from "./animate.js";
 
 const FILTERS = [
   ["all", "전체"],
@@ -19,6 +20,7 @@ const progressEl = document.getElementById("progress");
 const errorEl = document.getElementById("error");
 
 let deck = null;
+let busy = false;
 
 function showError(message) {
   stageEl.hidden = true;
@@ -48,8 +50,9 @@ function renderFilters() {
     button.disabled = counts[value] === 0;
     if (value === deck.filter()) button.classList.add("active");
     button.addEventListener("click", () => {
-      if (deck.setFilter(value)) renderAll();
       button.blur();
+      if (busy) return;
+      if (deck.setFilter(value)) renderAll();
     });
     filtersEl.appendChild(button);
   }
@@ -65,10 +68,19 @@ function renderAll() {
   renderProgress();
 }
 
-function navigate(dir) {
+async function navigate(dir) {
+  if (busy) return;
   const result = dir === "next" ? deck.next() : deck.prev();
   if (result === "stay") return;
-  renderAll();
+  busy = true;
+  try {
+    await playTransition(cardEl, dir, () => {
+      renderCurrent();
+      renderProgress();
+    });
+  } finally {
+    busy = false;
+  }
 }
 
 async function boot() {

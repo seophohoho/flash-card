@@ -255,3 +255,10 @@ pre code {
     font-size: 13px;
   }
 }
+
+.leaving {
+  position: fixed;
+  margin: 0;
+  pointer-events: none;
+  will-change: transform;
+}
