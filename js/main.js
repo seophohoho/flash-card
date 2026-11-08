@@ -1,6 +1,7 @@
 import { parseQuestions } from "./validate.js";
 import { createDeck } from "./deck.js";
 import { renderCard } from "./render.js";
+import { bindInput } from "./input.js";
 
 const FILTERS = [
   ["all", "전체"],
@@ -64,6 +65,12 @@ function renderAll() {
   renderProgress();
 }
 
+function navigate(dir) {
+  const result = dir === "next" ? deck.next() : deck.prev();
+  if (result === "stay") return;
+  renderAll();
+}
+
 async function boot() {
   try {
     const response = await fetch("questions.json");
@@ -76,6 +83,7 @@ async function boot() {
     return;
   }
   renderAll();
+  bindInput(stageEl, navigate);
 }
 
 boot();
