@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { classifySwipe, keyToDirection } from "../js/input.js";
+import { classifySwipe, keyToDirection, isToggleKey } from "../js/input.js";
 
 test("왼쪽으로 50px 넘게 쓸면 next, 오른쪽이면 prev", () => {
   assert.equal(classifySwipe(-60, 5), "next");
@@ -37,4 +37,25 @@ test("Alt·Ctrl·Cmd와 함께 누른 방향키는 브라우저 뒤로 가기용
 
 test("Shift와 함께 누른 방향키는 그대로 인정한다", () => {
   assert.equal(keyToDirection({ key: "ArrowRight", shiftKey: true }), "next");
+});
+
+test("아래 방향키만 펼치기/접기 키로 인정한다", () => {
+  assert.equal(isToggleKey({ key: "ArrowDown" }), true);
+  assert.equal(isToggleKey({ key: "ArrowUp" }), false);
+  assert.equal(isToggleKey({ key: "ArrowRight" }), false);
+  assert.equal(isToggleKey({ key: "Enter" }), false);
+});
+
+test("수정 키와 함께 누른 아래 방향키는 무시한다", () => {
+  for (const mod of ["altKey", "ctrlKey", "metaKey"]) {
+    assert.equal(isToggleKey({ key: "ArrowDown", [mod]: true }), false);
+  }
+});
+
+test("키를 계속 누를 때 반복해서 들어오는 이벤트는 무시한다", () => {
+  assert.equal(isToggleKey({ key: "ArrowDown", repeat: true }), false);
+});
+
+test("Shift와 함께 누른 아래 방향키는 인정한다", () => {
+  assert.equal(isToggleKey({ key: "ArrowDown", shiftKey: true }), true);
 });

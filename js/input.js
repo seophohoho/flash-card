@@ -13,10 +13,22 @@ export function keyToDirection(event) {
   return null;
 }
 
-export function bindInput(swipeTarget, onNavigate) {
+export function isToggleKey(event) {
+  if (event.altKey || event.ctrlKey || event.metaKey || event.repeat) return false;
+  return event.key === "ArrowDown";
+}
+
+export function bindInput(swipeTarget, onNavigate, onToggle) {
   document.addEventListener("keydown", (event) => {
     const direction = keyToDirection(event);
-    if (direction) onNavigate(direction);
+    if (direction) {
+      onNavigate(direction);
+      return;
+    }
+    if (onToggle && isToggleKey(event)) {
+      event.preventDefault();
+      onToggle();
+    }
   });
 
   let start = null;

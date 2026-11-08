@@ -78,6 +78,11 @@ function toggleAutoExpand() {
   if (autoExpand) renderCurrent();
 }
 
+function toggleCardAnswer() {
+  const button = cardEl.querySelector(".toggle");
+  if (button) button.click();
+}
+
 function renderProgress() {
   progressEl.textContent = `${deck.index() + 1} / ${deck.total()}`;
 }
@@ -117,7 +122,7 @@ async function boot() {
     return;
   }
   renderAll();
-  bindInput(stageEl, navigate);
+  bindInput(stageEl, navigate, toggleCardAnswer);
   autoExpandEl.addEventListener("click", toggleAutoExpand);
   window.addEventListener("resize", fit);
   window.addEventListener("orientationchange", fit);
