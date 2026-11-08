@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { classifySwipe } from "../js/input.js";
+import { classifySwipe, keyToDirection } from "../js/input.js";
 
 test("왼쪽으로 50px 넘게 쓸면 next, 오른쪽이면 prev", () => {
   assert.equal(classifySwipe(-60, 5), "next");
@@ -19,4 +19,22 @@ test("세로 이동이 가로 이동보다 크거나 같으면 null", () => {
 
 test("51px이고 세로가 더 작으면 인정", () => {
   assert.equal(classifySwipe(51, 50), "prev");
+});
+
+test("방향키만 인정하고 좌우 키를 방향으로 바꾼다", () => {
+  assert.equal(keyToDirection({ key: "ArrowRight" }), "next");
+  assert.equal(keyToDirection({ key: "ArrowLeft" }), "prev");
+  assert.equal(keyToDirection({ key: "ArrowUp" }), null);
+  assert.equal(keyToDirection({ key: "a" }), null);
+});
+
+test("Alt·Ctrl·Cmd와 함께 누른 방향키는 브라우저 뒤로 가기용이라 무시한다", () => {
+  for (const mod of ["altKey", "ctrlKey", "metaKey"]) {
+    assert.equal(keyToDirection({ key: "ArrowRight", [mod]: true }), null);
+    assert.equal(keyToDirection({ key: "ArrowLeft", [mod]: true }), null);
+  }
+});
+
+test("Shift와 함께 누른 방향키는 그대로 인정한다", () => {
+  assert.equal(keyToDirection({ key: "ArrowRight", shiftKey: true }), "next");
 });

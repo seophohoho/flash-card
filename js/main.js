@@ -84,6 +84,8 @@ async function navigate(dir) {
       renderCurrent();
       renderProgress();
     });
+  } catch (error) {
+    if (error.name !== "AbortError") console.error(error);
   } finally {
     busy = false;
   }

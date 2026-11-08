@@ -6,10 +6,17 @@ export function classifySwipe(dx, dy) {
   return dx < 0 ? "next" : "prev";
 }
 
+export function keyToDirection(event) {
+  if (event.altKey || event.ctrlKey || event.metaKey) return null;
+  if (event.key === "ArrowRight") return "next";
+  if (event.key === "ArrowLeft") return "prev";
+  return null;
+}
+
 export function bindInput(swipeTarget, onNavigate) {
   document.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowRight") onNavigate("next");
-    else if (event.key === "ArrowLeft") onNavigate("prev");
+    const direction = keyToDirection(event);
+    if (direction) onNavigate(direction);
   });
 
   let start = null;
