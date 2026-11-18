@@ -6,8 +6,13 @@
 <title>플래시카드</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/summary.css">
 </head>
 <body>
+<nav id="modes" aria-label="화면 전환">
+  <button type="button" data-mode="cards" class="active">문제 카드</button>
+  <button type="button" data-mode="summary">과목평가</button>
+</nav>
 <div id="filters"></div>
 <div id="stage">
   <div id="deck">
@@ -20,6 +25,33 @@
 <button id="auto-expand" type="button" aria-pressed="false">항상 펼치기: OFF</button>
 <div id="hint"><span class="hint-pc">방향키 ← → 넘기기 · ↓ 펼치기/접기</span><span class="hint-touch">좌우로 쓸어서 넘기기</span></div>
 <div id="error" hidden></div>
+<section id="summary" hidden aria-label="과목평가 요약본">
+  <div id="sum-bar">
+    <div id="sum-parts"></div>
+    <button id="sum-toc" type="button">☰ 목차</button>
+    <div id="sum-progress"></div>
+  </div>
+  <article id="sum-article"></article>
+  <nav id="sum-pager"></nav>
+</section>
+<div id="sum-sheet" hidden>
+  <div class="sheet-panel">
+    <div class="sheet-head"><span>목차</span><button id="sum-sheet-close" type="button">닫기</button></div>
+    <div id="sum-sheet-list"></div>
+  </div>
+</div>
+<div id="dg-modal" hidden>
+  <div class="dgm-bar">
+    <span id="dgm-title">다이어그램</span>
+    <span class="dgm-spacer"></span>
+    <button id="dgm-out" type="button" aria-label="축소">−</button>
+    <button id="dgm-zoom-wrap" type="button" disabled><span id="dgm-zoom">100%</span></button>
+    <button id="dgm-in" type="button" aria-label="확대">+</button>
+    <button id="dgm-fit" type="button">맞춤</button>
+    <button id="dgm-close" type="button">닫기</button>
+  </div>
+  <div id="dgm-body"></div>
+</div>
 <script type="module" src="js/main.js"></script>
 </body>
 </html>

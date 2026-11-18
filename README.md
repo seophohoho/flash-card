@@ -20,6 +20,10 @@ Node 20 이상이 필요하다.
 node --test
 ```
 
+## 과목평가 요약본
+
+상단의 "과목평가" 버튼을 누르면 `summary/flink.md`를 읽어 요약본 화면으로 바꾼다. 마크다운은 `js/markdown.js`가 직접 해석하고, 다이어그램(mermaid)은 `vendor/mermaid.min.js`(11.17.2)가 그린다. 이 파일은 요약본을 열 때만 불러온다. 요약본을 고치려면 `summary/flink.md`를 수정한다. `#summary-2`처럼 주소 끝에 붙이면 해당 편으로 바로 열린다.
+
 ## 문제 파일
 
 `questions.json`의 모양과 규칙은 [questions-format.md](questions-format.md)를 본다.

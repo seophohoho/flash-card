@@ -4,6 +4,7 @@ import { renderCard } from "./render.js";
 import { bindInput } from "./input.js";
 import { playTransition } from "./animate.js";
 import { fitCard, getAvailableHeight } from "./fit.js";
+import { openSummary, closeSummary } from "./summary.js";
 
 const FILTERS = [
   ["all", "전체"],
@@ -21,19 +22,64 @@ const progressEl = document.getElementById("progress");
 const hintEl = document.getElementById("hint");
 const autoExpandEl = document.getElementById("auto-expand");
 const errorEl = document.getElementById("error");
+const modesEl = document.getElementById("modes");
+const summaryEl = document.getElementById("summary");
 
 let deck = null;
 let busy = false;
 let autoExpand = false;
+let mode = "cards";
+let cardsFailed = false;
 
 function showError(message) {
-  stageEl.hidden = true;
-  filtersEl.hidden = true;
-  progressEl.hidden = true;
-  hintEl.hidden = true;
-  autoExpandEl.hidden = true;
+  cardsFailed = true;
   errorEl.textContent = message;
-  errorEl.hidden = false;
+  applyMode();
+}
+
+function applyMode() {
+  const cards = mode === "cards";
+  const showCards = cards && !cardsFailed;
+  stageEl.hidden = !showCards;
+  filtersEl.hidden = !showCards;
+  progressEl.hidden = !showCards;
+  hintEl.hidden = !showCards;
+  autoExpandEl.hidden = !showCards;
+  errorEl.hidden = !(cards && cardsFailed);
+  summaryEl.hidden = cards;
+  for (const button of modesEl.children) {
+    button.classList.toggle("active", button.dataset.mode === mode);
+  }
+}
+
+function parseHash() {
+  const match = /^#summary(?:-(\d+))?$/.exec(window.location.hash);
+  return match ? { mode: "summary", part: match[1] ? Number(match[1]) - 1 : 0 } : { mode: "cards", part: 0 };
+}
+
+function setMode(next, part = 0) {
+  mode = next;
+  applyMode();
+  if (next === "summary") {
+    openSummary(part);
+  } else {
+    closeSummary();
+    history.replaceState(null, "", window.location.pathname + window.location.search);
+    if (deck) fit();
+  }
+}
+
+function bindModes() {
+  for (const button of modesEl.children) {
+    button.addEventListener("click", () => {
+      button.blur();
+      if (button.dataset.mode !== mode) setMode(button.dataset.mode);
+    });
+  }
+  window.addEventListener("hashchange", () => {
+    const target = parseHash();
+    if (target.mode !== mode || target.mode === "summary") setMode(target.mode, target.part);
+  });
 }
 
 function fit() {
@@ -111,6 +157,9 @@ async function navigate(dir) {
 }
 
 async function boot() {
+  bindModes();
+  const initial = parseHash();
+  if (initial.mode === "summary") setMode("summary", initial.part);
   try {
     const response = await fetch("questions.json");
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -122,7 +171,7 @@ async function boot() {
     return;
   }
   renderAll();
-  bindInput(stageEl, navigate, toggleCardAnswer);
+  bindInput(stageEl, navigate, toggleCardAnswer, () => mode === "cards");
   autoExpandEl.addEventListener("click", toggleAutoExpand);
   window.addEventListener("resize", fit);
   window.addEventListener("orientationchange", fit);

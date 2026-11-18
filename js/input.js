@@ -18,8 +18,9 @@ export function isToggleKey(event) {
   return event.key === "ArrowDown";
 }
 
-export function bindInput(swipeTarget, onNavigate, onToggle) {
+export function bindInput(swipeTarget, onNavigate, onToggle, isEnabled = () => true) {
   document.addEventListener("keydown", (event) => {
+    if (!isEnabled()) return;
     const direction = keyToDirection(event);
     if (direction) {
       onNavigate(direction);

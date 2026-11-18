@@ -16,7 +16,7 @@ body {
 
 #filters {
   position: fixed;
-  top: 3vh;
+  top: 54px;
   left: 0;
   right: 0;
   display: flex;
@@ -58,7 +58,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14vh 10vw;
+  padding: max(14vh, 108px) 10vw;
   touch-action: pan-y;
   user-select: none;
 }
@@ -297,7 +297,7 @@ pre code {
 
 @media (max-width: 600px) {
   #stage {
-    padding: 18vh 7vw;
+    padding: max(18vh, 108px) 7vw;
   }
 
   .card {
