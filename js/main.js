@@ -1,8 +1,8 @@
 import { parseQuestions } from "./validate.js";
-import { createDeck } from "./deck.js";
+import { createDeck, SUBJECTS } from "./deck.js";
 import { renderCard } from "./render.js";
 import { bindInput } from "./input.js";
-import { playTransition } from "./animate.js";
+import { playTransition, playDeal } from "./animate.js";
 import { fitCard, getAvailableHeight } from "./fit.js";
 import { openSummary, closeSummary } from "./summary.js";
 
@@ -13,6 +13,7 @@ const FILTERS = [
   ["essay", "주관식"],
 ];
 
+const optionsEl = document.getElementById("options");
 const filtersEl = document.getElementById("filters");
 const stageEl = document.getElementById("stage");
 const cardEl = document.getElementById("card");
@@ -21,6 +22,8 @@ const g2El = document.getElementById("g2");
 const progressEl = document.getElementById("progress");
 const hintEl = document.getElementById("hint");
 const autoExpandEl = document.getElementById("auto-expand");
+const controlsEl = document.getElementById("controls");
+const orderEl = document.getElementById("order");
 const errorEl = document.getElementById("error");
 const modesEl = document.getElementById("modes");
 const summaryEl = document.getElementById("summary");
@@ -41,10 +44,11 @@ function applyMode() {
   const cards = mode === "cards";
   const showCards = cards && !cardsFailed;
   stageEl.hidden = !showCards;
+  optionsEl.hidden = !showCards;
   filtersEl.hidden = !showCards;
   progressEl.hidden = !showCards;
   hintEl.hidden = !showCards;
-  autoExpandEl.hidden = !showCards;
+  controlsEl.hidden = !showCards;
   errorEl.hidden = !(cards && cardsFailed);
   summaryEl.hidden = cards;
   for (const button of modesEl.children) {
@@ -115,6 +119,70 @@ function renderFilters() {
   }
 }
 
+function renderOptions() {
+  const counts = deck.subjectCounts();
+  optionsEl.replaceChildren();
+  const group = (items, isActive, onPick) => {
+    const box = document.createElement("div");
+    box.className = "group";
+    for (const [value, label, count] of items) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = label;
+      if (count !== undefined) {
+        const n = document.createElement("span");
+        n.className = "n";
+        n.textContent = String(count);
+        button.appendChild(n);
+        button.disabled = count === 0;
+      }
+      if (isActive(value)) button.classList.add("active");
+      button.addEventListener("click", () => {
+        button.blur();
+        if (busy) return;
+        onPick(value);
+      });
+      box.appendChild(button);
+    }
+    optionsEl.appendChild(box);
+  };
+  group(
+    [["all", "전체 과목", counts.all], ...SUBJECTS.map(([k, l]) => [k, l, counts[k]])],
+    (value) => value === deck.subject(),
+    (value) => {
+      if (deck.setSubject(value)) renderAll();
+    },
+  );
+}
+
+function renderOrder() {
+  orderEl.replaceChildren();
+  for (const [value, label] of [
+    ["shuffle", "섞기"],
+    ["ordered", "순서대로"],
+  ]) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = label;
+    if ((value === "ordered") === deck.isOrdered()) button.classList.add("active");
+    button.addEventListener("click", async () => {
+      button.blur();
+      if (busy) return;
+      deck.setOrdered(value === "ordered");
+      renderAll();
+      busy = true;
+      try {
+        await playDeal(cardEl, [g1El, g2El]);
+      } catch (error) {
+        if (error.name !== "AbortError") console.error(error);
+      } finally {
+        busy = false;
+      }
+    });
+    orderEl.appendChild(button);
+  }
+}
+
 function toggleAutoExpand() {
   autoExpandEl.blur();
   if (busy) return;
@@ -134,6 +202,8 @@ function renderProgress() {
 }
 
 function renderAll() {
+  renderOptions();
+  renderOrder();
   renderFilters();
   renderCurrent();
   renderProgress();

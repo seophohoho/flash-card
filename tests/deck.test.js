@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { shuffle, createDeck } from "../js/deck.js";
+import { shuffle, createDeck, subjectOf } from "../js/deck.js";
 
 const q = (type, n) => ({
   type,
@@ -96,5 +96,53 @@ test("prev는 첫 카드에서 stay, 아니면 moved", () => {
   assert.equal(d.prev(), "stay");
   d.next();
   assert.equal(d.prev(), "moved");
+  assert.equal(d.index(), 0);
+});
+
+const src = (subject, n) => ({
+  type: "multiple",
+  question: `${subject}${n}`,
+  answer: "a",
+  explanation: "해설",
+  source: `6_데이터엔지니어링_활용1_${subject}_x.pdf p.${n}`,
+});
+const mixed = () => [src("flink", 1), src("spark", 1), src("flink", 2), src("spark", 2)];
+
+test("subjectOf는 출처 파일명에서 과목을 읽는다", () => {
+  assert.equal(subjectOf(src("spark", 1)), "spark");
+  assert.equal(subjectOf(src("flink", 1)), "flink");
+  assert.equal(subjectOf(q("multiple", 1)), null);
+});
+
+test("setSubject는 과목으로 거르고 subjectCounts를 센다", () => {
+  const d = createDeck(mixed(), identityRng);
+  assert.deepEqual(d.subjectCounts(), { all: 4, flink: 2, spark: 2 });
+  assert.equal(d.setSubject("spark"), true);
+  assert.deepEqual(d.cards().map((c) => c.question), ["spark1", "spark2"]);
+  assert.equal(d.index(), 0);
+});
+
+test("setOrdered(true)는 원본 순서로 보여 주고 index를 0으로 돌린다", () => {
+  const rev = () => 0;
+  const d = createDeck(mixed(), rev);
+  d.next();
+  d.setOrdered(true);
+  assert.equal(d.index(), 0);
+  assert.deepEqual(d.cards().map((c) => c.question), ["flink1", "spark1", "flink2", "spark2"]);
+});
+
+test("순서대로 모드에서 마지막 next는 섞지 않고 처음으로", () => {
+  let calls = 0;
+  const rng = () => {
+    calls += 1;
+    return 0.999999;
+  };
+  const d = createDeck(mixed(), rng);
+  d.setOrdered(true);
+  const before = calls;
+  d.setSubject("flink");
+  d.next();
+  assert.equal(d.next(), "restarted");
+  assert.equal(calls, before);
   assert.equal(d.index(), 0);
 });

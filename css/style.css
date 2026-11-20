@@ -14,9 +14,55 @@ body {
   font-family: -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
 }
 
-#filters {
+#options {
   position: fixed;
   top: 54px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  z-index: 40;
+}
+
+#options .group {
+  display: flex;
+  gap: 6px;
+}
+
+#options button,
+#order button {
+  border: 1.5px solid #cfc6b0;
+  background: #fff;
+  color: #555;
+  border-radius: 999px;
+  padding: 5px 13px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#options button.active,
+#order button.active {
+  background: #2b2b2b;
+  border-color: #2b2b2b;
+  color: #fff;
+}
+
+#options button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#options button .n {
+  opacity: 0.6;
+  margin-left: 4px;
+  font-size: 12px;
+}
+
+#filters {
+  position: fixed;
+  top: 96px;
   left: 0;
   right: 0;
   display: flex;
@@ -58,7 +104,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: max(14vh, 108px) 10vw;
+  padding: max(14vh, 150px) 10vw;
   touch-action: pan-y;
   user-select: none;
 }
@@ -232,11 +278,25 @@ pre code {
   color: #8a7a55;
 }
 
-#auto-expand {
+#controls {
   position: fixed;
-  left: 16px;
-  bottom: max(calc(6vh - 8px), 24px);
+  left: 0;
+  right: 0;
+  bottom: calc(6vh + 28px);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
   z-index: 40;
+}
+
+#order {
+  display: flex;
+  gap: 6px;
+}
+
+#auto-expand {
   border: 1.5px solid #cfc6b0;
   background: #fff;
   color: #555;
@@ -297,7 +357,7 @@ pre code {
 
 @media (max-width: 600px) {
   #stage {
-    padding: max(18vh, 108px) 7vw;
+    padding: max(18vh, 150px) 7vw;
   }
 
   .card {
@@ -312,7 +372,18 @@ pre code {
     grid-template-columns: 1fr;
   }
 
+  #options {
+    gap: 6px 10px;
+  }
+
+  #options button,
+  #order button {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
   #filters {
+    top: 92px;
     gap: 6px;
   }
 
@@ -327,4 +398,15 @@ pre code {
   margin: 0;
   pointer-events: none;
   will-change: transform;
+}
+
+.deal-card {
+  position: fixed;
+  margin: 0;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.14);
+  pointer-events: none;
+  will-change: transform;
+  z-index: 30;
 }
