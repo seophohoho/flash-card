@@ -970,5 +970,989 @@
     "question": "워터마크가 무엇이고 왜 필요한지 한두 문장으로 쓰시오.",
     "answer": "워터마크는 이벤트 시간이 어디까지 진행됐는지 나타내는 기준값이다. 이벤트가 순서가 뒤바뀌거나 늦게 도착할 수 있으므로, 이벤트 시간 윈도우를 언제 닫고 결과를 낼지 정하기 위해 필요하다.",
     "explanation": "출처: 8_데이터엔지니어링_활용1_flink_checkpointing_and_window.pdf p.45~47"
+  },
+  {
+    "type": "multiple",
+    "question": "Apache Spark를 처음 개발한 곳은?",
+    "choices": [
+      "UC Berkeley AMP Lab",
+      "구글 연구소",
+      "야후 데이터센터",
+      "Apache 재단(처음부터 재단 프로젝트로 시작)"
+    ],
+    "answer": 0,
+    "explanation": "2009년 개발을 시작했고, 2010년 오픈소스로 공개했다. 2014년에 Apache 프로젝트로 채택됐다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.6~7"
+  },
+  {
+    "type": "multiple",
+    "question": "Hadoop MapReduce의 구조적 한계로 강의가 든 것은?",
+    "choices": [
+      "저장 공간이 부족하다",
+      "느린 속도와 반복 작업의 비효율성",
+      "SQL을 지원하지 않는다",
+      "여러 서버로 나눠 처리할 수 없다"
+    ],
+    "answer": 1,
+    "explanation": "머신러닝, 스트리밍 분석처럼 반복적이고 실시간성이 필요한 작업에 맞지 않았다. Spark는 이 문제를 풀려고 만들어졌다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.7"
+  },
+  {
+    "type": "multiple",
+    "question": "Spark 이전 기술이 느렸던 이유로 맞는 것은?",
+    "choices": [
+      "CPU를 한 개만 쓰기 때문이다",
+      "데이터를 암호화해서 저장하기 때문이다",
+      "디스크에 읽고 쓰는 방식인데, 디스크는 메모리(RAM)보다 훨씬 느리기 때문이다",
+      "메모리에만 저장해서 용량이 모자라기 때문이다"
+    ],
+    "answer": 2,
+    "explanation": "디스크 I/O는 디스크에 데이터를 읽고 쓰는 작업이다. 이 부분이 병목(bottleneck, 한 곳이 느려 전체가 막히는 지점)이 된다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.9"
+  },
+  {
+    "type": "multiple",
+    "question": "Spark가 속도를 높이는 방법으로 맞는 것은?",
+    "choices": [
+      "모든 중간 결과를 디스크에 저장한다",
+      "작업을 서버 한 대에서만 처리한다",
+      "SQL 쿼리를 쓰지 못하게 막는다",
+      "중간 결과를 메모리에 두는 인메모리 연산으로 디스크 I/O를 줄인다"
+    ],
+    "answer": 3,
+    "explanation": "강의는 속도의 세 축으로 인메모리 연산, DAG 기반 스케줄링, Tungsten 코드 생성 최적화를 든다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.11"
+  },
+  {
+    "type": "multiple",
+    "question": "Spark의 '모듈성'을 가장 잘 설명한 것은?",
+    "choices": [
+      "SQL, 스트리밍, 머신러닝, 그래프를 하나의 엔진에서 처리한다",
+      "코드를 한 줄도 바꾸지 않아도 된다",
+      "Python 한 가지 언어만 지원한다",
+      "파일 시스템을 자체적으로 제공한다"
+    ],
+    "answer": 0,
+    "explanation": "그래서 Hive, Storm, Mahout 같은 별도 시스템을 따로 붙일 필요가 없다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.12"
+  },
+  {
+    "type": "multiple",
+    "question": "Spark 구성 요소와 역할의 짝이 맞는 것은?",
+    "choices": [
+      "Spark SQL - 그래프 분석 / GraphX - SQL 질의",
+      "Spark SQL - 구조적 데이터와 SQL 질의 / MLlib - 머신러닝 라이브러리",
+      "Spark Streaming - 머신러닝 / MLlib - 실시간 처리",
+      "GraphX - 파일 저장 / Spark Core - SQL 질의"
+    ],
+    "answer": 1,
+    "explanation": "Spark Streaming은 실시간 처리(마이크로 배치 방식), GraphX는 그래프 분석(PageRank 등), Spark Core는 핵심 실행 플랫폼이다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.14"
+  },
+  {
+    "type": "multiple",
+    "question": "Spark 활용 시 주의점으로 강의가 든 것이 아닌 것은?",
+    "choices": [
+      "작은 데이터 파일을 처리하면 비효율적이다",
+      "자체 파일 관리 시스템이 없다",
+      "반복 연산이 Hadoop MapReduce보다 느리다",
+      "메모리 비용이 높다"
+    ],
+    "answer": 2,
+    "explanation": "주의점은 엄밀한 실시간 처리 불가(마이크로 배치), 작은 파일 비효율, 자체 파일 시스템 부재(HDFS, S3 사용), 높은 메모리 비용이다. 반복 연산이 빠른 것은 오히려 Spark의 장점이다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.15~16"
+  },
+  {
+    "type": "multiple",
+    "question": "Spark 실행 구조 세 요소의 역할 짝으로 맞는 것은?",
+    "choices": [
+      "Driver - 작업 수행 / Worker - 자원 관리",
+      "Cluster Manager - 실행 계획 생성 / Driver - 자원 관리",
+      "Worker - 실행 계획 생성 / Cluster Manager - 작업 수행",
+      "Driver - 실행 계획 생성과 작업 분배 / Cluster Manager - 자원 관리 / Worker - 작업 수행"
+    ],
+    "answer": 3,
+    "explanation": "작업 결과는 Worker에서 다시 Driver로 돌아온다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.17"
+  },
+  {
+    "type": "multiple",
+    "question": "드라이버(Driver)가 하는 일이 아닌 것은?",
+    "choices": [
+      "태스크를 직접 실행하는 일꾼 역할",
+      "클러스터 매니저에 CPU와 메모리를 요청한다",
+      "애플리케이션 로직을 스테이지와 태스크로 나눈다",
+      "태스크 실행 결과를 수집한다"
+    ],
+    "answer": 0,
+    "explanation": "태스크를 실제로 실행하는 것은 실행기(Executor)다. Driver는 지휘자 역할이다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.20~21"
+  },
+  {
+    "type": "multiple",
+    "question": "하나의 Spark 애플리케이션에 존재하는 드라이버는 몇 개인가?",
+    "choices": [
+      "Worker 수만큼",
+      "1개",
+      "Executor 수만큼",
+      "Job 수만큼"
+    ],
+    "answer": 1,
+    "explanation": "드라이버는 애플리케이션당 하나뿐이다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.20"
+  },
+  {
+    "type": "multiple",
+    "question": "클라이언트 모드에 대한 설명으로 맞는 것은?",
+    "choices": [
+      "클러스터 매니저가 Driver를 클러스터 안에서 실행한다",
+      "Driver 없이 Executor만 실행된다",
+      "spark-submit을 실행한 프로세스에서 Driver가 실행된다",
+      "Driver가 Worker 노드 한 곳에 고정된다"
+    ],
+    "answer": 2,
+    "explanation": "반대로 클러스터 모드는 클러스터 매니저가 Driver를 클러스터에서 실행한다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.20"
+  },
+  {
+    "type": "multiple",
+    "question": "실행기(Executor)에 대한 설명으로 맞는 것은?",
+    "choices": [
+      "클러스터 전체의 자원을 나눠 주는 관리자다",
+      "애플리케이션을 스테이지로 나누는 계획자다",
+      "DataFrame 작업의 진입점 객체다",
+      "Driver에게 받은 태스크를 슬롯(스레드)에서 병렬로 실행하고 결과를 Driver로 돌려주는 JVM 프로세스다"
+    ],
+    "answer": 3,
+    "explanation": "출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.21"
+  },
+  {
+    "type": "multiple",
+    "question": "SparkSession에 대한 설명으로 맞는 것은?",
+    "choices": [
+      "DataFrame, SQL 등 Spark 기능을 쓰는 진입점이며, 애플리케이션에서는 직접 생성해야 한다",
+      "클러스터에 자원을 요청하는 관리자 프로세스다",
+      "셔플을 일으키는 연산자다",
+      "파티션 하나를 처리하는 실행 단위다"
+    ],
+    "answer": 0,
+    "explanation": "spark-shell에서는 기본으로 제공된다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.22"
+  },
+  {
+    "type": "multiple",
+    "question": "pyspark 셸을 실행하면 시작할 때 이미 만들어져 있는 변수 짝은?",
+    "choices": [
+      "rdd와 df",
+      "sc와 spark",
+      "driver와 executor",
+      "job과 stage"
+    ],
+    "answer": 1,
+    "explanation": "sc는 SparkContext, spark는 SparkSession이다. 시작 메시지에 \"Spark context available as 'sc'\", \"SparkSession available as 'spark'\"가 나온다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.37"
+  },
+  {
+    "type": "multiple",
+    "question": "잡(Job)은 언제 만들어지는가?",
+    "choices": [
+      "map(), filter() 같은 변환을 호출할 때",
+      "SparkSession을 만들 때",
+      "collect(), count(), save() 같은 액션을 호출할 때",
+      "spark-submit 명령을 입력할 때"
+    ],
+    "answer": 2,
+    "explanation": "잡은 액션에 대한 응답으로 만들어지는 여러 태스크의 병렬 연산이다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.23"
+  },
+  {
+    "type": "multiple",
+    "question": "잡을 스테이지로 나누는 기준은?",
+    "choices": [
+      "Executor의 개수",
+      "데이터 파일의 크기",
+      "코드의 줄 수",
+      "셔플(파티션 사이의 데이터 이동)"
+    ],
+    "answer": 3,
+    "explanation": "잡은 셔플 기준으로 서로 의존성을 가진 태스크 모음인 스테이지로 나뉜다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.24~25"
+  },
+  {
+    "type": "multiple",
+    "question": "태스크(Task)에 대한 설명으로 맞는 것은?",
+    "choices": [
+      "스테이지를 이루는 가장 기본적인 실행 단위로, 데이터의 파티션 하나를 맡아 작업한다",
+      "클러스터 자원을 관리하는 프로세스다",
+      "액션 하나가 만드는 작업 묶음이다",
+      "SQL 쿼리 한 줄을 뜻한다"
+    ],
+    "answer": 0,
+    "explanation": "개별 task slot에 할당되어 실행된다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.26"
+  },
+  {
+    "type": "multiple",
+    "question": "Transformation의 특징으로 맞는 것은?",
+    "choices": [
+      "원본 데이터를 제자리에서 수정한다",
+      "원본을 바꾸지 않고 새로운 RDD나 DataFrame을 만든다",
+      "호출 즉시 결과를 Driver로 반환한다",
+      "외부 저장소에 결과를 기록한다"
+    ],
+    "answer": 1,
+    "explanation": "예: map(), filter(), flatMap(), select(), groupBy(), orderBy(). 결과를 계산하거나 저장하는 것은 Action이다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.28"
+  },
+  {
+    "type": "multiple",
+    "question": "Narrow와 Wide transformation의 짝으로 맞는 것은?",
+    "choices": [
+      "Narrow - groupBy, orderBy / Wide - map, filter",
+      "Narrow - reduceByKey / Wide - filter",
+      "Narrow - map, filter / Wide - groupBy, reduceByKey",
+      "둘 다 셔플이 일어나고 예시만 다르다"
+    ],
+    "answer": 2,
+    "explanation": "Narrow는 파티션 사이 셔플 없이 처리하고, Wide는 파티션끼리 데이터를 교환한다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.29~30"
+  },
+  {
+    "type": "multiple",
+    "question": "다음 코드를 실행했는데 아무 출력도 나오지 않았다. 이유는?\n```python\nrdd = sc.textFile(\"test.txt\")\nfiltered = rdd.filter(lambda line: \"Spark\" in line)\nlower = filtered.map(lambda line: line.lower())\n```",
+    "choices": [
+      "test.txt의 파일 크기가 너무 커서",
+      "filter는 원래 아무것도 계산하지 않는 함수라서",
+      "Executor가 아직 시작되지 않아서",
+      "Action이 없어서 변환 계획만 기록되었기 때문이다"
+    ],
+    "answer": 3,
+    "explanation": "모든 transformation은 즉시 계산되지 않고 lineage로 기록된다. count(), collect() 같은 Action을 호출해야 계산된다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.33, 46~47"
+  },
+  {
+    "type": "multiple",
+    "question": "지연 평가(lazy evaluation)의 장점으로 맞는 것은?",
+    "choices": [
+      "전체 변환 흐름을 보고 실행 계획을 최적화할 수 있고, lineage를 재실행해 장애에서 복구할 수 있다",
+      "변환을 호출하는 즉시 결과를 볼 수 있다",
+      "디스크 사용량이 0이 된다",
+      "셔플이 완전히 사라진다"
+    ],
+    "answer": 0,
+    "explanation": "lineage(계보)는 데이터가 어떤 변환을 거쳐 만들어졌는지 적어 둔 기록이다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.33"
+  },
+  {
+    "type": "multiple",
+    "question": "Spark 설치 후 환경변수를 적용하는 명령은?",
+    "choices": [
+      "tar -xvzf ~/.bashrc",
+      "source ~/.bashrc",
+      "pip install ~/.bashrc",
+      "sudo mv ~/.bashrc spark"
+    ],
+    "answer": 1,
+    "explanation": "~/.bashrc에 export SPARK_HOME=/home/ssafy/spark 와 PATH 줄을 적고, source로 적용한 뒤 echo $SPARK_HOME으로 확인한다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.36"
+  },
+  {
+    "type": "multiple",
+    "question": "PySpark에서 Python 코드가 Spark로 전달되는 순서로 맞는 것은?",
+    "choices": [
+      "Python 코드 → Executors → Py4J → Cluster Manager",
+      "Py4J → Python 코드 → JVM → Driver 종료",
+      "Python 코드(PySpark API) → Py4J → JVM의 SparkSession/SparkContext(Driver) → Cluster Manager → Executors",
+      "Cluster Manager → Python 코드 → JVM → Executors"
+    ],
+    "answer": 2,
+    "explanation": "Py4J는 Python 코드가 JVM 쪽 객체를 호출하게 해 주는 다리다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.39"
+  },
+  {
+    "type": "multiple",
+    "question": "docker-compose 예제에서 spark-worker가 마스터에 접속할 때 쓰는 주소는?",
+    "choices": [
+      "http://spark-worker:8084",
+      "spark://spark-worker:4040",
+      "jdbc://spark-master:8083",
+      "spark://spark-master:7077"
+    ],
+    "answer": 3,
+    "explanation": "SPARK_MASTER_URL=spark://spark-master:7077로 지정한다. 잡은 docker exec spark-master /opt/spark/bin/spark-submit --master spark://spark-master:7077 ... 로 제출한다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.49~50"
+  },
+  {
+    "type": "short",
+    "question": "Spark가 중간 결과를 디스크 대신 메모리에 두고 계산하는 방식을 영문으로 쓰시오. (In-○○○○○○ Computation)",
+    "answer": "In-Memory Computation",
+    "explanation": "디스크 I/O를 최소화해 속도를 높인다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.11"
+  },
+  {
+    "type": "short",
+    "question": "RDD가 어떤 변환을 거쳐 만들어졌는지 적어 둔 기록을 무엇이라 하는가? (영문 l로 시작)",
+    "answer": "lineage(계보)",
+    "explanation": "지연 평가의 바탕이 되고, 장애 시 이 기록을 다시 실행해 복구한다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.33"
+  },
+  {
+    "type": "short",
+    "question": "만든 Spark 프로그램을 클러스터에 제출해 실행시키는 명령어 이름은?",
+    "answer": "spark-submit",
+    "explanation": "클라이언트 모드에서는 spark-submit을 실행한 프로세스에서 Driver가 실행된다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.20, 50"
+  },
+  {
+    "type": "short",
+    "question": "잡을 스테이지로 나누는 기준이 되는, 파티션 사이에 데이터를 주고받아 다시 섞는 일을 무엇이라 하는가?",
+    "answer": "셔플(shuffle)",
+    "explanation": "Wide transformation에서 일어난다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.24, 30"
+  },
+  {
+    "type": "essay",
+    "question": "Narrow transformation과 Wide transformation의 차이를 예시와 함께 쓰시오.",
+    "answer": "Narrow는 파티션 사이 셔플 없이 처리하는 변환이다(예: map, filter). Wide는 파티션끼리 데이터를 교환하는 셔플이 발생하는 변환이다(예: groupBy, reduceByKey).",
+    "explanation": "join은 두 입력의 파티셔닝에 따라 narrow일 수도, wide일 수도 있다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.29~30"
+  },
+  {
+    "type": "essay",
+    "question": "Driver, Cluster Manager, Executor의 역할을 각각 한 문장으로 쓰시오.",
+    "answer": "Driver는 실행 계획을 세워 잡을 스테이지와 태스크로 나누고 실행기에 전달해 결과를 수집한다. Cluster Manager는 CPU와 메모리 같은 클러스터 자원을 관리한다. Executor는 전달받은 태스크를 실제로 실행하고 결과를 Driver에 돌려준다.",
+    "explanation": "계획과 분배는 Driver, 자원은 Cluster Manager, 실행은 Executor다.\n\n출처: 9_데이터엔지니어링_활용1_spark_기본_구조와_세팅.pdf p.17, 19~21"
+  },
+  {
+    "type": "multiple",
+    "question": "RDD(Resilient Distributed Dataset)에 대한 설명으로 맞는 것은?",
+    "choices": [
+      "큰 데이터를 여러 파티션으로 쪼개 분산 처리하는 Spark의 기본 데이터 처리 단위다",
+      "컬럼 이름과 타입을 가진 표 형태의 데이터 구조다",
+      "SQL 쿼리를 최적화하는 엔진이다",
+      "클러스터 자원을 나눠 주는 관리자다"
+    ],
+    "answer": 0,
+    "explanation": "파티션은 RDD를 쪼갠 조각이다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.5~6"
+  },
+  {
+    "type": "multiple",
+    "question": "RDD의 '탄력성(Resilient)'이 뜻하는 것은?",
+    "choices": [
+      "한 번 만들면 값을 바꿀 수 없다",
+      "노드가 장애로 중단되어도 데이터를 복구할 수 있다",
+      "변환을 호출하면 바로 계산한다",
+      "한 RDD에 여러 타입을 섞을 수 있다"
+    ],
+    "answer": 1,
+    "explanation": "값을 바꿀 수 없는 성질은 불변성(Immutable)이다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.7"
+  },
+  {
+    "type": "multiple",
+    "question": "RDD에 map을 적용하면 어떻게 되는가?",
+    "choices": [
+      "원본 RDD의 값이 제자리에서 바뀐다",
+      "원본 RDD가 삭제된다",
+      "원본은 그대로이고 새 RDD가 만들어진다",
+      "결과가 바로 Driver로 전송된다"
+    ],
+    "answer": 2,
+    "explanation": "RDD는 한 번 만들면 바꿀 수 없다(불변성). 바꾸고 싶으면 변환해서 새 RDD를 만든다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.7"
+  },
+  {
+    "type": "multiple",
+    "question": "PySpark에서 RDD의 타입 안정성이 적용되지 않는 이유는?",
+    "choices": [
+      "Python이 병렬 처리를 지원하지 않기 때문이다",
+      "RDD가 숫자 타입만 허용하기 때문이다",
+      "PySpark가 RDD를 지원하지 않기 때문이다",
+      "Python이 동적 타입 언어이기 때문이다"
+    ],
+    "answer": 3,
+    "explanation": "타입 안정성은 데이터 타입을 컴파일 시점에 검사하는 성질이다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.8"
+  },
+  {
+    "type": "multiple",
+    "question": "RDD에서 지연 평가가 동작하는 방식으로 맞는 것은?",
+    "choices": [
+      "변환은 lineage에 기록만 하고, Action이 필요한 파티션의 계산을 실행한다",
+      "변환을 호출하는 즉시 모든 파티션을 계산한다",
+      "Action은 계산을 하지 않고 기록만 한다",
+      "lineage는 셔플이 끝난 뒤에야 기록된다"
+    ],
+    "answer": 0,
+    "explanation": "같은 Stage의 좁은 변환은 파티션별로 이어서 처리한다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.10"
+  },
+  {
+    "type": "multiple",
+    "question": "다음 코드에서 실제 계산이 일어나는 시점과 result 값이 맞게 짝지어진 것은?\n```python\nrdd = sc.parallelize([\"apple\", \"banana\", \"spark\", \"data\"])\nupper_rdd = rdd.map(lambda x: x.upper())\nfiltered_rdd = upper_rdd.filter(lambda x: \"SPARK\" in x)\nresult = filtered_rdd.collect()\n```",
+    "choices": [
+      "map() 호출 시점 / ['SPARK']",
+      "collect() 호출 시점 / ['SPARK']",
+      "filter() 호출 시점 / ['spark']",
+      "collect() 호출 시점 / ['spark']"
+    ],
+    "answer": 1,
+    "explanation": "map과 filter는 계획만 기록한다. collect()가 Action이라 이때 계산이 돈다. map이 대문자로 바꾼 뒤 filter가 SPARK가 든 항목만 남긴다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.11"
+  },
+  {
+    "type": "multiple",
+    "question": "RDD를 만드는 방법과 용도의 짝으로 맞는 것은?",
+    "choices": [
+      "parallelize() - 외부 파일에서, 대용량용 / textFile() - 메모리의 리스트에서",
+      "둘 다 외부 파일 전용이다",
+      "parallelize() - 메모리의 리스트를 RDD로, 테스트나 소규모 데이터용 / textFile() - 외부 파일에서 RDD로",
+      "둘 다 대용량 데이터를 클러스터로 보내는 가장 효율적인 방법이다"
+    ],
+    "answer": 2,
+    "explanation": "parallelize는 데이터가 크면 비효율적일 수 있다. textFile은 CSV, 로그, S3, HBase, Cassandra 등에서 읽을 수 있다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.14~16"
+  },
+  {
+    "type": "multiple",
+    "question": "map과 flatMap의 차이로 맞는 것은?",
+    "choices": [
+      "map은 셔플이 발생하고 flatMap은 발생하지 않는다",
+      "flatMap은 항목 수가 항상 줄어든다",
+      "map은 Action이고 flatMap은 Transformation이다",
+      "map은 항목 수가 그대로이고, flatMap은 결과를 평탄화해 항목 수가 늘 수 있다"
+    ],
+    "answer": 3,
+    "explanation": "둘 다 셔플이 없고 파티션 안에서 처리한다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.22, 29~30"
+  },
+  {
+    "type": "multiple",
+    "question": "다음 코드의 결과는?\n```python\nx = sc.parallelize([1, 2])\ny = x.flatMap(lambda v: (v, v * 10))\nprint(y.collect())\n```",
+    "choices": [
+      "[1, 10, 2, 20]",
+      "[(1, 10), (2, 20)]",
+      "[1, 2, 10, 20]",
+      "[10, 20]"
+    ],
+    "answer": 0,
+    "explanation": "flatMap은 요소마다 만든 결과를 한 겹으로 펴서 이어 붙인다. 강의 예제도 요소 하나가 여러 항목으로 펼쳐진다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.29~30"
+  },
+  {
+    "type": "multiple",
+    "question": "다음 코드의 결과는?\n```python\nx = sc.parallelize([1, 2, 3, 4, 5])\ny = x.filter(lambda v: v % 2 == 1)\nprint(y.collect())\n```",
+    "choices": [
+      "[2, 4]",
+      "[1, 3, 5]",
+      "[1, 2, 3, 4, 5]",
+      "[True, False, True, False, True]"
+    ],
+    "answer": 1,
+    "explanation": "filter는 함수가 true를 반환한 항목만 남긴다. 셔플은 없다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.32~36"
+  },
+  {
+    "type": "multiple",
+    "question": "RDD가 두 파티션 P0=[1, 2, 3], P1=[4, 5, 6]이다. map(x * 2) 뒤에 filter(x > 6)를 걸면 각 파티션에 남는 값은?",
+    "choices": [
+      "P0: [8] / P1: [10, 12]",
+      "P0: [2, 4, 6] / P1: [8, 10, 12]",
+      "P0: [] / P1: [8, 10, 12]",
+      "파티션이 하나로 합쳐져 [8, 10, 12]만 남는다"
+    ],
+    "answer": 2,
+    "explanation": "P0은 2, 4, 6이라 6 초과가 없어 비지만 파티션은 사라지지 않는다. 두 연산은 각 파티션 안에서 셔플 없이 이어진다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.37~38"
+  },
+  {
+    "type": "multiple",
+    "question": "x = sc.parallelize([1, 2, 3], 2)이고 x.glom().collect()가 [[1], [2, 3]]이다. 다음 코드로 만든 y.glom().collect()는?\n```python\ndef f(iterator):\n    yield sum(iterator)\n    yield 42\ny = x.mapPartitions(f)\n```",
+    "choices": [
+      "[[1, 42], [2, 3, 42]]",
+      "[[43], [47]]",
+      "[[6, 42]]",
+      "[[1, 42], [5, 42]]"
+    ],
+    "answer": 3,
+    "explanation": "mapPartitions는 파티션마다 함수를 한 번 적용한다. 첫 파티션 합은 1, 둘째는 2+3=5다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.39~40"
+  },
+  {
+    "type": "multiple",
+    "question": "mapPartitionsWithIndex에 넘기는 함수가 받는 인자는?",
+    "choices": [
+      "(partitionIndex, iterator)",
+      "(key, value)",
+      "(element)",
+      "(rdd, partition)"
+    ],
+    "answer": 0,
+    "explanation": "예제는 yield (partitionIndex, sum(iterator))로 파티션 번호와 합을 함께 내보낸다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.41~42"
+  },
+  {
+    "type": "multiple",
+    "question": "x = ['John', 'Fred', 'Anna', 'James']에 keyBy(lambda w: w[0])를 적용한 결과는?",
+    "choices": [
+      "[('John', 'J'), ('Fred', 'F'), ('Anna', 'A'), ('James', 'J')]",
+      "[('J', 'John'), ('F', 'Fred'), ('A', 'Anna'), ('J', 'James')]",
+      "[('J', ['John', 'James']), ('F', ['Fred']), ('A', ['Anna'])]",
+      "['J', 'F', 'A', 'J']"
+    ],
+    "answer": 1,
+    "explanation": "keyBy는 요소에 키만 붙여 Pair RDD를 만든다(셔플 없음). 같은 키끼리 모으는 일은 groupBy/groupByKey가 한다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.43~47"
+  },
+  {
+    "type": "multiple",
+    "question": "groupBy와 groupByKey의 설명으로 맞는 것은?",
+    "choices": [
+      "groupBy는 셔플이 없고 groupByKey만 셔플이 발생한다",
+      "groupBy는 Action이고 groupByKey는 Transformation이다",
+      "groupBy는 함수 결과를 키로 삼아 묶고, groupByKey는 이미 (키, 값) 쌍인 RDD에서 키별로 묶으며, 둘 다 셔플이 발생한다",
+      "둘 다 Pair RDD에서만 쓸 수 있다"
+    ],
+    "answer": 2,
+    "explanation": "같은 키를 한곳에 모으려면 파티션 사이에서 데이터를 옮겨야 한다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.53, 57"
+  },
+  {
+    "type": "multiple",
+    "question": "x = sc.parallelize([('a', 1), ('b', 2), ('a', 3)])에 x.groupByKey()를 적용해 각 키의 값을 리스트로 보면? (순서는 무시한다)",
+    "choices": [
+      "('a', 4), ('b', 2)",
+      "('a', 1), ('b', 2), ('a', 3)",
+      "('a', [1]), ('b', [2]), ('a', [3])",
+      "('a', [1, 3]), ('b', [2])"
+    ],
+    "answer": 3,
+    "explanation": "groupByKey는 값을 합치지 않고 키별로 모으기만 한다. 합계는 sum을 따로 걸거나 reduceByKey로 구한다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.57"
+  },
+  {
+    "type": "multiple",
+    "question": "reduceByKey가 groupByKey보다 셔플로 옮기는 데이터가 적은 이유는?",
+    "choices": [
+      "파티션 안에서 먼저 집계해 부분 결과만 옮기기 때문이다",
+      "셔플이 아예 일어나지 않기 때문이다",
+      "결과를 Driver로 바로 보내기 때문이다",
+      "값을 디스크에 저장하지 않기 때문이다"
+    ],
+    "answer": 0,
+    "explanation": "강의 그림은 원본 값 11개 대 부분 합계 6개의 이동을 비교한다. 결과는 같고 이동량이 다르다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.61~63"
+  },
+  {
+    "type": "multiple",
+    "question": "words = ['one', 'two', 'two', 'three', 'three', 'three']를 (w, 1)로 만든 뒤 reduceByKey(lambda a, b: a + b)를 적용한 결과는?",
+    "choices": [
+      "[('one', 1), ('two', 1), ('three', 1)]",
+      "[('one', 1), ('two', 2), ('three', 3)]",
+      "[('one', 3), ('two', 2), ('three', 1)]",
+      "[('one', [1]), ('two', [1, 1]), ('three', [1, 1, 1])]"
+    ],
+    "answer": 1,
+    "explanation": "단어 수 세기다. groupByKey 뒤 sum으로 구해도 결과는 같다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.59~60"
+  },
+  {
+    "type": "multiple",
+    "question": "x = [('a', 1), ('b', 2)], y = [('a', 3), ('a', 4), ('b', 5)]일 때 x.join(y)의 결과는?",
+    "choices": [
+      "[('a', (1, 3)), ('b', (2, 5))]",
+      "[('a', 4), ('b', 7)]",
+      "[('a', (1, 3)), ('a', (1, 4)), ('b', (2, 5))]",
+      "[('a', [1, 3, 4]), ('b', [2, 5])]"
+    ],
+    "answer": 2,
+    "explanation": "같은 키끼리 가능한 모든 쌍을 만든다. a는 y에 두 개라 두 쌍이 나온다. 셔플이 발생한다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.64~68"
+  },
+  {
+    "type": "multiple",
+    "question": "union과 distinct의 설명으로 맞는 것은?",
+    "choices": [
+      "union은 중복을 제거하고 셔플이 발생한다",
+      "distinct는 셔플 없이 각 파티션에서만 중복을 제거한다",
+      "둘 다 셔플이 발생하지 않는다",
+      "union은 셔플 없이 파티션을 이어 붙이며 중복을 제거하지 않고, distinct는 같은 값을 모으느라 셔플이 발생한다"
+    ],
+    "answer": 3,
+    "explanation": "예제에서 x=[1,2,3], y=[3,4]를 union하면 3이 두 번 남는다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.70, 74"
+  },
+  {
+    "type": "multiple",
+    "question": "repartition과 coalesce의 짝으로 맞는 것은?",
+    "choices": [
+      "repartition - 셔플 발생, 파티션 수 변경과 재분배 / coalesce(shuffle=False) - 셔플 없이 파티션 수 줄이기",
+      "repartition - 셔플 없음 / coalesce - 셔플 발생",
+      "둘 다 셔플이 없다",
+      "둘 다 파티션 수를 줄이는 것만 가능하다"
+    ],
+    "answer": 0,
+    "explanation": "강의 터미널 예제에서 파티션 8개가 repartition(10)으로 10개, coalesce(2)로 2개가 됐다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.77~81"
+  },
+  {
+    "type": "multiple",
+    "question": "partitionBy(numPartitions, partitioner)에 대한 설명으로 맞는 것은?",
+    "choices": [
+      "파티션 수를 셔플 없이 줄이기만 한다",
+      "지정한 partitioner가 정한 파티션으로 항목을 재분배하며, 셔플이 발생한다",
+      "요소에 키만 붙인다",
+      "원본 RDD를 삭제하고 Driver로 모은다"
+    ],
+    "answer": 1,
+    "explanation": "기본 partitioner는 portable_hash다. 같은 partitioner면 셔플을 생략할 수 있다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.82~87"
+  },
+  {
+    "type": "multiple",
+    "question": "rdd = [1, 2, 3, 4]일 때 count(), reduce(lambda a, b: a + b), mean()의 결과는 순서대로?",
+    "choices": [
+      "4, 10, 10",
+      "10, 4, 2.5",
+      "4, 10, 2.5",
+      "4, 24, 2.5"
+    ],
+    "answer": 2,
+    "explanation": "reduce는 1+2=3, 3+3=6, 6+4=10처럼 쌍씩 합쳐 하나의 값을 만든다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.89, 94~98"
+  },
+  {
+    "type": "multiple",
+    "question": "Spark UI로 예측한 실행을 확인할 때 비교하는 것으로 맞는 것은?",
+    "choices": [
+      "Driver의 CPU 온도",
+      "RDD 변수 이름과 파일 크기",
+      "Python 버전과 설치 경로",
+      "Stage 경계, Task 수, Shuffle Read/Write"
+    ],
+    "answer": 3,
+    "explanation": "먼저 결과와 셔플 경계를 손으로 예측하고, 작은 데이터는 glom().collect()로 파티션별 결과를 확인한 뒤 Spark UI로 비교한다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.103"
+  },
+  {
+    "type": "short",
+    "question": "RDD의 파티션별 요소를 리스트로 묶어 보여 주는 메서드 이름은? (○○○○())",
+    "answer": "glom()",
+    "explanation": "예: x.glom().collect()가 [[1], [2, 3]]처럼 파티션별로 묶어 보여 준다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.40, 103"
+  },
+  {
+    "type": "short",
+    "question": "같은 키를 모으려고 파티션 사이에서 서버끼리 데이터를 주고받는 일을 무엇이라 하는가?",
+    "answer": "셔플(shuffle)",
+    "explanation": "groupByKey, reduceByKey, join, distinct, repartition 등에서 발생한다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.58, 88"
+  },
+  {
+    "type": "short",
+    "question": "메모리에 있는 Python 리스트를 RDD로 바꾸는 메서드 이름은?",
+    "answer": "parallelize()",
+    "explanation": "주로 테스트나 소규모 데이터를 다룰 때 쓴다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.14~15"
+  },
+  {
+    "type": "short",
+    "question": "RDD에서 키별 등장 횟수를 세어 딕셔너리 형태로 Driver에 돌려주는 Action 이름은? (count○○○○○)",
+    "answer": "countByKey()",
+    "explanation": "예: {'J': 2, 'F': 1, 'A': 1}\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.92~93"
+  },
+  {
+    "type": "essay",
+    "question": "reduceByKey와 groupByKey의 차이를 셔플 관점에서 쓰시오.",
+    "answer": "reduceByKey는 파티션 안에서 먼저 집계한 뒤 부분 결과만 키별로 옮기고, groupByKey는 합치지 않고 원본 값을 전부 키별로 옮긴다. 결과는 같지만 셔플로 이동하는 데이터 양이 다르다(강의 그림 기준 6개 대 11개).",
+    "explanation": "강의는 이동량 비교만 제시했다.\n\n출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.61~63"
+  },
+  {
+    "type": "essay",
+    "question": "RDD의 불변성(Immutable)과 지연 평가(Lazy Evaluation)를 각각 한 문장으로 설명하시오.",
+    "answer": "불변성은 한 번 만든 RDD를 바꿀 수 없고 변환하면 새 RDD가 생기는 성질이다. 지연 평가는 변환을 바로 계산하지 않고 lineage에 기록만 해 두었다가 Action이 호출될 때 필요한 계산을 실행하는 방식이다.",
+    "explanation": "출처: 10_데이터엔지니어링_활용1_spark_rdd.pdf p.7, 10"
+  },
+  {
+    "type": "multiple",
+    "question": "RDD가 DataFrame에 비해 가진 한계로 맞는 것은?",
+    "choices": [
+      "데이터 값만 표현할 뿐 스키마(컬럼 이름과 타입)를 명시적으로 표현할 방법이 없다",
+      "여러 서버에 분산해 처리할 수 없다",
+      "장애가 나면 복구할 수 없다",
+      "Python에서는 사용할 수 없다"
+    ],
+    "answer": 0,
+    "explanation": "스키마는 컬럼 이름과 타입을 적어 둔 데이터의 설계도다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.5"
+  },
+  {
+    "type": "multiple",
+    "question": "RDD에서 Catalyst 최적화가 제한되는 이유는?",
+    "choices": [
+      "RDD는 메모리에 올라가지 못하기 때문이다",
+      "RDD에 넣는 Python 함수 안의 표현식을 Catalyst가 분석하기 어렵기 때문이다",
+      "RDD는 파티션으로 나뉘지 않기 때문이다",
+      "Catalyst는 Scala 코드만 읽을 수 있기 때문이다"
+    ],
+    "answer": 1,
+    "explanation": "그래서 조건을 앞으로 옮기기, 필요한 컬럼만 고르기 같은 최적화가 제한된다. DataFrame은 스키마와 표현식을 엔진에 전달해 추가 최적화가 가능하다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.6"
+  },
+  {
+    "type": "multiple",
+    "question": "DataFrame에 대한 설명으로 맞는 것은?",
+    "choices": [
+      "값만 담고 스키마가 없는 분산 데이터 모음이다",
+      "SQL 쿼리를 최적화하는 엔진이다",
+      "행과 열로 이루어진 표로, 각 열이 명확한 타입과 스키마를 가진 분산 데이터 컬렉션이다",
+      "클러스터 자원을 관리하는 프로세스다"
+    ],
+    "answer": 2,
+    "explanation": "이름 있는 컬럼과 스키마를 가진 분산 인메모리 테이블처럼 동작한다. 구조와 포맷은 Pandas의 영향을 많이 받았다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.7~8"
+  },
+  {
+    "type": "multiple",
+    "question": "'DataFrame = RDD + schema + DSL'에서 DSL이 가리키는 것은?",
+    "choices": [
+      "SQL 문자열만 받는 쿼리 창구",
+      "스키마를 JSON으로 저장하는 포맷",
+      "클러스터에 작업을 제출하는 명령",
+      "filter, select 같은 DataFrame 메서드 호출 방식의 전용 문법"
+    ],
+    "answer": 3,
+    "explanation": "DSL(Domain-Specific Language)은 특정 목적을 위해 만든 전용 문법이다. 예: data.filter(col(\"label\") == 1)\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.11"
+  },
+  {
+    "type": "multiple",
+    "question": "다음 DSL 코드와 같은 결과를 내는 SQL은? (뷰 data가 등록되어 있다)\n```python\ndata.filter(col(\"label\") == 1)\n```",
+    "choices": [
+      "SELECT * FROM data WHERE label = 1",
+      "SELECT label FROM data ORDER BY 1",
+      "SELECT * FROM data GROUP BY label",
+      "SELECT COUNT(*) FROM data"
+    ],
+    "answer": 0,
+    "explanation": "강의는 같은 필터링을 DSL과 SQL 두 방식으로 보여 주고, 결과가 같다고 한다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.12"
+  },
+  {
+    "type": "multiple",
+    "question": "스키마를 미리 정의해서 읽을 때의 장점으로 맞는 것은?",
+    "choices": [
+      "데이터가 자동으로 압축되어 저장 공간이 줄어든다",
+      "Spark가 타입을 추측할 부담을 덜고, 스키마 확정용 별도 Job을 막으며, 맞지 않는 데이터를 조기에 발견한다",
+      "셔플이 완전히 사라진다",
+      "파일을 읽지 않고도 모든 값을 알 수 있다"
+    ],
+    "answer": 1,
+    "explanation": "읽을 때 스키마를 추론하면 Spark가 파일의 많은 부분을 읽는 별도 Job을 만들 수 있다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.10"
+  },
+  {
+    "type": "multiple",
+    "question": "RDD와 DataFrame의 비교로 맞는 것은?",
+    "choices": [
+      "RDD는 Catalyst로 자동 최적화되고, DataFrame은 직접 최적화해야 한다",
+      "RDD는 명확한 스키마를 가지고, DataFrame은 값만 표현한다",
+      "RDD는 최적화가 어렵고 저수준 API이며, DataFrame은 Catalyst 자동 최적화와 고수준 API(SQL 활용 가능)를 가진다",
+      "둘은 최적화와 사용 편의성이 같다"
+    ],
+    "answer": 2,
+    "explanation": "출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.13"
+  },
+  {
+    "type": "multiple",
+    "question": "다음 중 DataFrame 대신 RDD를 쓰는 편이 맞는 경우는?",
+    "choices": [
+      "SQL로 집계하고 싶을 때",
+      "컬럼과 타입을 명시적으로 검증하고 싶을 때",
+      "Catalyst 최적화를 받고 싶을 때",
+      "저수준의 Transformation과 Action을 직접 제어해야 할 때"
+    ],
+    "answer": 3,
+    "explanation": "DataFrame은 고수준 추상화, SQL, 스키마 검증, Catalyst 최적화와 Tungsten 코드 생성이 필요할 때 쓴다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.14~15"
+  },
+  {
+    "type": "multiple",
+    "question": "'DataFrame이 중심이고 Spark SQL은 그것을 SQL 방식으로 접근하게 해 주는 방법 중 하나'라는 말의 근거는?",
+    "choices": [
+      "둘이 같은 Catalyst 최적화 엔진을 공유하기 때문이다",
+      "Spark SQL이 DataFrame과 완전히 독립된 별도 엔진이기 때문이다",
+      "DataFrame은 SQL 문법을 쓸 수 없기 때문이다",
+      "Spark SQL은 RDD를 쓰지 않고 디스크만 쓰기 때문이다"
+    ],
+    "answer": 0,
+    "explanation": "Spark SQL은 DataFrame/Dataset을 SQL처럼 다루게 해 주는 분산 SQL 쿼리 엔진이다. DataFrame API 명령도 내부적으로 Spark SQL 엔진으로 최적화해 실행한다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.16, 23"
+  },
+  {
+    "type": "multiple",
+    "question": "Catalyst Optimizer의 처리 순서로 맞는 것은?",
+    "choices": [
+      "Physical Plan → Logical Plan → Optimized Logical Plan → 해석",
+      "SQL Parser·DataFrame API 해석 → Logical Plan → Optimized Logical Plan → Physical Plan",
+      "Logical Plan → Physical Plan → Optimized Logical Plan → 해석",
+      "Optimized Logical Plan → 해석 → Physical Plan → Logical Plan"
+    ],
+    "answer": 1,
+    "explanation": "논리 계획은 무엇을 할지, 물리 계획은 어떻게 실행할지에 가깝다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.20~22"
+  },
+  {
+    "type": "multiple",
+    "question": "Python에서 쓸 수 있는 구조화 API는?",
+    "choices": [
+      "Dataset만 쓸 수 있다",
+      "DataFrame과 Dataset 모두 쓸 수 있다",
+      "DataFrame만 쓸 수 있다. Dataset은 Java, Scala에서만 쓴다",
+      "둘 다 쓸 수 없고 RDD만 쓸 수 있다"
+    ],
+    "answer": 2,
+    "explanation": "Spark 2.0에서 두 API가 합쳐져 DataFrame은 Dataset[Row]의 별칭이다. Python, R은 타입 안전을 보장하지 않는 언어라 Dataset을 쓰지 못한다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.24"
+  },
+  {
+    "type": "multiple",
+    "question": "DataFrame을 SQL에서 테이블처럼 쓰려면 먼저 해야 하는 일은?",
+    "choices": [
+      "df.toPandas()로 바꾼다",
+      "df.rdd로 바꾼다",
+      "df.explain()을 호출한다",
+      "createOrReplaceTempView 등으로 뷰(view)를 등록한다"
+    ],
+    "answer": 3,
+    "explanation": "등록한 뒤 spark.sql(\"SELECT * FROM viewName\")으로 조회한다. 글로벌 뷰는 global_temp.viewName으로 조회한다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.25"
+  },
+  {
+    "type": "multiple",
+    "question": "DataFrame을 만드는 대표적인 방법으로 맞는 것은?",
+    "choices": [
+      "createDataFrame(), read, readStream",
+      "map(), filter(), collect()",
+      "write, save, mode",
+      "parallelize(), textFile(), reduce()"
+    ],
+    "answer": 0,
+    "explanation": "SparkSession이 DataFrame 작업의 진입점이다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.27"
+  },
+  {
+    "type": "multiple",
+    "question": "read와 readStream의 차이로 맞는 것은?",
+    "choices": [
+      "read는 스트리밍 입력이고, readStream은 배치 입력이다",
+      "read는 저장된 데이터를 한 번에 읽는 배치 입력이고, readStream은 계속 들어오는 데이터를 읽는 스트리밍 입력이다",
+      "read는 파일만, readStream은 DB만 읽는다",
+      "둘은 완전히 같고 이름만 다르다"
+    ],
+    "answer": 1,
+    "explanation": "출력도 짝이 있다. 배치 결과 저장은 write, 스트리밍 결과 저장은 writeStream이다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.30~32"
+  },
+  {
+    "type": "multiple",
+    "question": "spark.read 체인에서 schema()의 역할은?",
+    "choices": [
+      "읽어올 데이터의 형식을 지정한다",
+      "실제로 데이터를 로드한다",
+      "컬럼명과 데이터 타입을 직접 정의한다",
+      "헤더 같은 세부 읽기 옵션을 지정한다"
+    ],
+    "answer": 2,
+    "explanation": "format()은 형식, option()은 세부 옵션, load()는 실제 로드를 맡는다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.30"
+  },
+  {
+    "type": "multiple",
+    "question": "입력과 출력의 호출 위치로 맞는 것은?",
+    "choices": [
+      "입력은 DataFrame.read, 출력은 SparkSession.write",
+      "둘 다 SparkSession에서 호출한다",
+      "둘 다 DataFrame 객체에서 호출한다",
+      "입력은 SparkSession(read), 출력은 DataFrame 객체의 write"
+    ],
+    "answer": 3,
+    "explanation": "데이터를 만들거나 읽을 때는 SparkSession, 저장하거나 전송할 때는 DataFrame.write를 쓴다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.33"
+  },
+  {
+    "type": "multiple",
+    "question": "write의 mode 중 저장 위치에 이미 데이터가 있으면 저장을 건너뛰는 것은?",
+    "choices": [
+      "ignore",
+      "overwrite",
+      "append",
+      "error"
+    ],
+    "answer": 0,
+    "explanation": "overwrite는 덮어쓰기, append는 뒤에 추가, error는 이미 있으면 오류 발생이다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.33"
+  },
+  {
+    "type": "multiple",
+    "question": "다음 코드에서 원본 df는 어떻게 되는가?\n```python\nage_df = df.withColumn(\"Age\", col(\"Age\").cast(\"int\"))\n```",
+    "choices": [
+      "df의 Age 컬럼이 제자리에서 정수로 바뀐다",
+      "원본 df는 그대로이고, Age가 정수로 바뀐 새 DataFrame이 반환된다",
+      "df가 삭제된다",
+      "Age 컬럼이 문자열로 한 번 더 바뀐다"
+    ],
+    "answer": 1,
+    "explanation": "withColumn은 원본을 수정하지 않고 컬럼을 추가하거나 바꾼 새 DataFrame을 반환한다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.34"
+  },
+  {
+    "type": "multiple",
+    "question": "to_date(col(\"OrderDate\"), \"dd-MM-yyyy\")에서 주의할 점은?",
+    "choices": [
+      "MM과 mm은 같은 뜻이라 아무거나 써도 된다",
+      "표시 형식만 바뀌고 타입은 문자열 그대로다",
+      "MM은 월이고 mm은 분이다. 문자열(StringType)이 날짜(DateType)로 바뀐다",
+      "dd는 연도를 뜻한다"
+    ],
+    "answer": 2,
+    "explanation": "입력 형식 dd-MM-yyyy는 일-월-연도다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.35"
+  },
+  {
+    "type": "multiple",
+    "question": "DSL과 SQL의 대응이 맞게 짝지어진 것은?",
+    "choices": [
+      "filter() - ORDER BY / isin() - LIKE / na.fill() - HAVING",
+      "when().otherwise() - JOIN / groupBy() - WHERE / sort() - GROUP BY",
+      "na.drop() - COALESCE / filter() - GROUP BY / join() - SELECT",
+      "when().otherwise() - CASE WHEN / isin() - IN / na.fill() - COALESCE"
+    ],
+    "answer": 3,
+    "explanation": "그 밖에 filter - WHERE, groupBy - GROUP BY, sort/orderBy - ORDER BY, join - JOIN이 대응한다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.49~64"
+  },
+  {
+    "type": "multiple",
+    "question": "column1 값이 'ABCDEFG'일 때 df.column1.substr(2, 3)의 결과는?",
+    "choices": [
+      "BCD",
+      "ABC",
+      "CDE",
+      "BCDE"
+    ],
+    "answer": 0,
+    "explanation": "2번째 문자부터 3개를 뽑는다. SQL로는 SUBSTRING(column1, 2, 3)이다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.53~54"
+  },
+  {
+    "type": "multiple",
+    "question": "column1이 A, B, A, A, A인 DataFrame에 df.groupBy(\"column1\").count()를 적용한 결과는?",
+    "choices": [
+      "A 5, B 1",
+      "A 4, B 1",
+      "A 1, B 4",
+      "A 4, B 4"
+    ],
+    "answer": 1,
+    "explanation": "SQL의 SELECT column1, COUNT(*) FROM my_table GROUP BY column1과 같은 결과다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.57~58"
+  },
+  {
+    "type": "multiple",
+    "question": "na.fill, na.drop, na.replace의 설명 짝으로 맞는 것은?",
+    "choices": [
+      "na.fill - NULL이 있는 행 제거 / na.drop - 값 치환 / na.replace - NULL 채움",
+      "셋 다 NULL이 있는 행을 제거한다",
+      "na.fill - NULL을 지정한 값으로 채움 / na.drop - NULL이 하나라도 있는 행 제거 / na.replace - 지정한 값을 다른 값으로 치환",
+      "셋 다 컬럼 이름을 바꾼다"
+    ],
+    "answer": 2,
+    "explanation": "SQL에서는 na.fill이 COALESCE, na.drop이 WHERE ... IS NOT NULL, na.replace가 CASE WHEN에 대응한다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.63~64"
+  },
+  {
+    "type": "multiple",
+    "question": "users(user_id 1~4: Alice, Bob, Chris, Diana)와 orders(주문 5건: user_id가 1, 1, 2, NULL, 99)를 user_id로 조인한다. INNER JOIN과 FULL OUTER JOIN의 결과 행 수는?",
+    "choices": [
+      "3행, 5행",
+      "5행, 7행",
+      "5행, 5행",
+      "3행, 7행"
+    ],
+    "answer": 3,
+    "explanation": "INNER는 짝이 있는 3행이다. FULL OUTER는 INNER 3행에 짝 없는 users 2행(Chris, Diana)과 짝 없는 orders 2행(user_id NULL, 99)을 더한 7행이다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.65~68"
+  },
+  {
+    "type": "multiple",
+    "question": "위와 같은 users, orders에서 주문이 없는 Chris, Diana까지 NULL로 남기려면 어떤 조인을 써야 하는가? (users 기준)",
+    "choices": [
+      "LEFT JOIN",
+      "INNER JOIN",
+      "RIGHT JOIN",
+      "CROSS JOIN"
+    ],
+    "answer": 0,
+    "explanation": "LEFT JOIN은 왼쪽(users) 기준으로 매칭이 없으면 NULL을 채운다. RIGHT JOIN은 orders 기준이다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.65~68"
+  },
+  {
+    "type": "short",
+    "question": "컬럼 이름과 타입을 적어 둔 데이터의 설계도를 무엇이라 하는가?",
+    "answer": "스키마(Schema)",
+    "explanation": "RDD는 이를 명시적으로 표현할 방법이 없고, DataFrame은 스키마를 가진다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.5, 10"
+  },
+  {
+    "type": "short",
+    "question": "Spark SQL과 DataFrame이 공유하는 쿼리 최적화 엔진의 이름은? (영문 C로 시작)",
+    "answer": "Catalyst Optimizer",
+    "explanation": "SQL, DataFrame, Dataset이 모두 Catalyst를 거쳐 Physical Plan이 된다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.20~23"
+  },
+  {
+    "type": "short",
+    "question": "DataFrame의 컬럼 이름을 바꾸는 메서드 이름은? (withColumn으로 시작)",
+    "answer": "withColumnRenamed",
+    "explanation": "예: df.withColumnRenamed(\"column1\", \"alphabet\"). SQL에서는 AS로 이름을 바꾼다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.55"
+  },
+  {
+    "type": "short",
+    "question": "계속 들어오는 데이터를 지속적으로 읽는 스트리밍 입력 API를 쓰시오. (spark.○○○○○○○○○○)",
+    "answer": "readStream",
+    "explanation": "저장된 데이터를 한 번에 읽는 배치 입력은 read다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.30"
+  },
+  {
+    "type": "essay",
+    "question": "DataFrame이 RDD의 한계를 어떻게 보완하는지 한두 문장으로 쓰시오.",
+    "answer": "RDD는 값만 표현하고 스키마가 없어 Python 함수 내부를 Catalyst가 분석하기 어렵다. DataFrame은 스키마와 표현식을 엔진에 전달해 Catalyst가 자동으로 최적화할 수 있고, 고수준 API와 SQL도 쓸 수 있다.",
+    "explanation": "출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.5~7, 13"
+  },
+  {
+    "type": "essay",
+    "question": "다음 DSL 코드와 같은 일을 하는 SQL을 쓰고, 두 방식이 같은 결과를 내는 이유를 설명하시오.\n```python\ndf.filter(df[\"column2\"] > 200)\n```",
+    "answer": "df를 뷰(my_table)로 등록한 뒤 SELECT * FROM my_table WHERE column2 > 200 으로 쓴다. DataFrame API와 Spark SQL이 같은 Catalyst 최적화 엔진을 공유하기 때문에 결과가 같다.",
+    "explanation": "DSL의 filter가 SQL의 WHERE에 대응한다.\n\n출처: 11_데이터엔지니어링_활용1_spark_dataframe_sparksql.pdf p.23, 59~60"
   }
 ]
