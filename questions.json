@@ -183,7 +183,7 @@
     "type": "multiple",
     "question": "병렬도(Parallelism)를 100으로 정했다. TaskManager를 몇 개 띄울지는 누가 정하는가?",
     "choices": [
-      "Flink가 필요한 슬롯 수를 계산하고 Resource Manager가 정한다",
+      "실행 환경에 따라 TaskManager를 확보하는 방식이 결정된다",
       "사용자가 Job에서 직접 정한다",
       "병렬도와 같은 100개로 항상 고정된다",
       "Kafka가 정한다"
