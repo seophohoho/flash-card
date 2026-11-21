@@ -2,8 +2,8 @@ import { splitParts } from "./markdown.js";
 import { renderPart } from "./summary-render.js";
 import { loadMermaid, renderDiagram, layoutDiagram, setPlaying } from "./diagram.js";
 
-const SOURCE_URL = "summary/flink.md";
-const PART_LABELS = ["기초", "DataStream", "체크포인트"];
+const SOURCE_URLS = ["summary/flink.md", "summary/spark.md"];
+const PART_LABELS = ["기초", "DataStream", "체크포인트", "Spark 구조", "RDD", "DataFrame·SQL"];
 const ZOOM_STEP = 1.25;
 const ZOOM_MIN = 0.4;
 const ZOOM_MAX = 3;
@@ -42,12 +42,16 @@ function el(tag, className, text) {
 async function loadParts() {
   if (parts) return parts;
   if (!loadingPromise) {
-    loadingPromise = fetch(SOURCE_URL).then((response) => {
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      return response.text();
-    });
+    loadingPromise = Promise.all(
+      SOURCE_URLS.map((url) =>
+        fetch(url).then((response) => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.text();
+        }),
+      ),
+    );
   }
-  parts = splitParts(await loadingPromise);
+  parts = (await loadingPromise).flatMap(splitParts);
   if (parts.length === 0) throw new Error("empty summary");
   return parts;
 }

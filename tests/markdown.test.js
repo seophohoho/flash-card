@@ -57,3 +57,12 @@ test("실제 요약 파일은 3편으로 나뉘고 다이어그램 35개", () =>
   assert.equal(blocks.filter((b) => b.type === "code" && b.lang === "mermaid").length, 35);
   assert.equal(blocks.filter((b) => b.type === "table").length > 5, true);
 });
+
+test("Spark 요약 파일은 3편으로 나뉘고 다이어그램 11개", () => {
+  const md = readFileSync(new URL("../summary/spark.md", import.meta.url), "utf8");
+  const parts = splitParts(md);
+  assert.equal(parts.length, 3);
+  const blocks = parts.flatMap((p) => parseBlocks(p.markdown));
+  assert.equal(blocks.filter((b) => b.type === "code" && b.lang === "mermaid").length, 11);
+  assert.equal(blocks.filter((b) => b.type === "table").length > 5, true);
+});
