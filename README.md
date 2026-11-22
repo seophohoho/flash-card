@@ -22,7 +22,7 @@ node --test
 
 ## 과목평가 요약본
 
-상단의 "과목평가" 버튼을 누르면 `summary/flink.md`와 `summary/spark.md`를 읽어 요약본 화면으로 바꾼다. 마크다운은 `js/markdown.js`가 직접 해석하고, 다이어그램(mermaid)은 `vendor/mermaid.min.js`(11.17.2)가 그린다. 이 파일은 요약본을 열 때만 불러온다. 요약본을 고치려면 해당 과목 파일(`summary/flink.md`, `summary/spark.md`)을 수정한다. 각 파일은 `# ` 제목마다 한 편으로 나뉘고, 편은 flink 3편 뒤에 spark 3편 순서로 이어진다. `#summary-2`처럼 주소 끝에 붙이면 해당 편으로 바로 열린다.
+상단의 "과목평가" 버튼을 누르면 `summary/flink_summary.md`와 `summary/spark_summary.md`를 읽어 요약본 화면으로 바꾼다. 마크다운은 `js/markdown.js`가 직접 해석하고, 다이어그램(mermaid)은 `vendor/mermaid.min.js`(11.17.2)가 그린다. 이 파일은 요약본을 열 때만 불러온다. 요약본을 고치려면 해당 과목 파일(`summary/flink_summary.md`, `summary/spark_summary.md`)을 수정한다. 각 파일은 `# ` 제목마다 한 편으로 나뉘고, 편은 flink 1편 뒤에 spark 1편 순서로 이어진다. `#summary-2`처럼 주소 끝에 붙이면 해당 편으로 바로 열린다.
 
 ## 문제 파일
 

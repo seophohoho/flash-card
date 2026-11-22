@@ -49,20 +49,18 @@ test("인라인", () => {
   ]);
 });
 
-test("실제 요약 파일은 3편으로 나뉘고 다이어그램 35개", () => {
-  const md = readFileSync(new URL("../summary/flink.md", import.meta.url), "utf8");
+test("Flink 요약 파일은 1편으로 나뉘고 표가 있다", () => {
+  const md = readFileSync(new URL("../summary/flink_summary.md", import.meta.url), "utf8");
   const parts = splitParts(md);
-  assert.equal(parts.length, 3);
+  assert.equal(parts.length, 1);
   const blocks = parts.flatMap((p) => parseBlocks(p.markdown));
-  assert.equal(blocks.filter((b) => b.type === "code" && b.lang === "mermaid").length, 35);
   assert.equal(blocks.filter((b) => b.type === "table").length > 5, true);
 });
 
-test("Spark 요약 파일은 3편으로 나뉘고 다이어그램 11개", () => {
-  const md = readFileSync(new URL("../summary/spark.md", import.meta.url), "utf8");
+test("Spark 요약 파일은 1편으로 나뉘고 표가 있다", () => {
+  const md = readFileSync(new URL("../summary/spark_summary.md", import.meta.url), "utf8");
   const parts = splitParts(md);
-  assert.equal(parts.length, 3);
+  assert.equal(parts.length, 1);
   const blocks = parts.flatMap((p) => parseBlocks(p.markdown));
-  assert.equal(blocks.filter((b) => b.type === "code" && b.lang === "mermaid").length, 11);
   assert.equal(blocks.filter((b) => b.type === "table").length > 5, true);
 });

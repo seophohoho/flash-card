@@ -2,8 +2,8 @@ import { splitParts } from "./markdown.js";
 import { renderPart } from "./summary-render.js";
 import { loadMermaid, renderDiagram, layoutDiagram, setPlaying } from "./diagram.js";
 
-const SOURCE_URLS = ["summary/flink.md", "summary/spark.md"];
-const PART_LABELS = ["기초", "DataStream", "체크포인트", "Spark 구조", "RDD", "DataFrame·SQL"];
+const SOURCE_URLS = ["summary/flink_summary.md", "summary/spark_summary.md"];
+const PART_LABELS = ["Flink", "Spark"];
 const ZOOM_STEP = 1.25;
 const ZOOM_MIN = 0.4;
 const ZOOM_MAX = 3;
