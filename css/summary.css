@@ -456,7 +456,9 @@
 }
 
 #summary td code {
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-all;
 }
 
 #summary tbody tr:nth-child(even) td {
@@ -466,6 +468,15 @@
 #summary td:first-child {
   font-weight: 700;
   color: #1c1c1c;
+  min-width: 6em;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+#summary th:first-child {
+  min-width: 6em;
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 
 .code-card {
