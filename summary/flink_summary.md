@@ -62,12 +62,47 @@
 - 슬롯(Task Slot) — TaskManager가 내주는 논리적 리소스 단위. 슬롯 하나가 연산 파이프라인 하나를 실행한다.
 - JobManager와 TaskManager는 태스크 배포·취소, 체크포인트 트리거, 상태 보고, 하트비트를 주고받는다. TaskManager끼리는 데이터 스트림을 교환한다.
 
+```mermaid
+flowchart LR
+  C["Client<br/>프로그램 제출"] --> D
+  subgraph JM["JobManager (마스터)"]
+    D["Dispatcher"] --> JMa["Job Master"]
+    JMa --> S["Scheduler<br/>Checkpoint Coordinator"]
+    JMa <--> RM["Resource Manager"]
+  end
+  RM -->|슬롯 요청| E["K8s / YARN"]
+  S -->|태스크 배포| T1
+  subgraph TM1["TaskManager 1"]
+    T1["Task Slot"]
+  end
+  subgraph TM2["TaskManager 2"]
+    T2["Task Slot"]
+  end
+  S -->|태스크 배포| T2
+  T1 ==>|데이터 스트림| T2
+  T1 -.->|하트비트·상태 보고| JMa
+```
+
 ### 실행 흐름
 
 1. 프로그램을 제출하면 파싱·타입 추출·최적화를 거쳐 데이터 플로우 그래프가 된다.
 2. JobManager가 이를 Task Execution Graph로 바꿔 병렬화한다.
 3. Resource Manager가 슬롯을 할당한다.
 4. TaskManager가 슬롯에서 병렬로 스트림을 처리한다.
+
+```mermaid
+flowchart LR
+  P["① 프로그램 제출"] --> G["② 데이터 플로우 그래프<br/>(파싱·타입 추출·최적화)"]
+  G --> EG["③ Task Execution Graph<br/>(JobManager가 병렬화)"]
+  EG --> R["④ Resource Manager<br/>슬롯 할당"]
+  R --> SL["⑤ TaskManager 슬롯"]
+  subgraph PIPE["⑥ 병렬 스트림 처리"]
+    SRC["Source"] ==> MAP["map / keyBy"] ==> SNK["Sink"]
+  end
+  SL --> SRC
+  K[("Kafka 등 입력")] ==>|이벤트| SRC
+  SNK ==>|결과| O[("DB / 파일 출력")]
+```
 
 ### 체이닝과 슬롯 공유
 
