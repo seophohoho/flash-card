@@ -5,6 +5,7 @@ import { bindInput } from "./input.js";
 import { playTransition, playDeal } from "./animate.js";
 import { fitCard, getAvailableHeight } from "./fit.js";
 import { openSummary, closeSummary } from "./summary.js";
+import { openExam, closeExam } from "./exam.js";
 
 const FILTERS = [
   ["all", "전체"],
@@ -27,6 +28,7 @@ const orderEl = document.getElementById("order");
 const errorEl = document.getElementById("error");
 const modesEl = document.getElementById("modes");
 const summaryEl = document.getElementById("summary");
+const examEl = document.getElementById("exam");
 
 let deck = null;
 let busy = false;
@@ -50,24 +52,29 @@ function applyMode() {
   hintEl.hidden = !showCards;
   controlsEl.hidden = !showCards;
   errorEl.hidden = !(cards && cardsFailed);
-  summaryEl.hidden = cards;
+  summaryEl.hidden = mode !== "summary";
+  examEl.hidden = mode !== "exam";
   for (const button of modesEl.children) {
     button.classList.toggle("active", button.dataset.mode === mode);
   }
 }
 
 function parseHash() {
-  const match = /^#summary(?:-(\d+))?$/.exec(window.location.hash);
-  return match ? { mode: "summary", part: match[1] ? Number(match[1]) - 1 : 0 } : { mode: "cards", part: 0 };
+  const match = /^#(summary|exam)(?:-(\d+))?$/.exec(window.location.hash);
+  return match ? { mode: match[1], part: match[2] ? Number(match[2]) - 1 : 0 } : { mode: "cards", part: 0 };
 }
 
 function setMode(next, part = 0) {
+  const previous = mode;
   mode = next;
   applyMode();
+  if (previous === "summary") closeSummary();
+  if (previous === "exam") closeExam();
   if (next === "summary") {
     openSummary(part);
+  } else if (next === "exam") {
+    openExam(part);
   } else {
-    closeSummary();
     history.replaceState(null, "", window.location.pathname + window.location.search);
     if (deck) fit();
   }
@@ -82,7 +89,7 @@ function bindModes() {
   }
   window.addEventListener("hashchange", () => {
     const target = parseHash();
-    if (target.mode !== mode || target.mode === "summary") setMode(target.mode, target.part);
+    if (target.mode !== mode || target.mode !== "cards") setMode(target.mode, target.part);
   });
 }
 
@@ -229,7 +236,7 @@ async function navigate(dir) {
 async function boot() {
   bindModes();
   const initial = parseHash();
-  if (initial.mode === "summary") setMode("summary", initial.part);
+  if (initial.mode !== "cards") setMode("summary", initial.part);
   try {
     const response = await fetch("questions.json");
     if (!response.ok) throw new Error(`HTTP ${response.status}`);

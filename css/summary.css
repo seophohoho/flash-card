@@ -29,7 +29,7 @@
   color: #fff;
 }
 
-#summary {
+:is(#summary, #exam) {
   position: fixed;
   top: 52px;
   left: 0;
@@ -45,7 +45,7 @@
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-#sum-bar {
+:is(#sum-bar, #exam-bar) {
   position: sticky;
   top: 0;
   z-index: 10;
@@ -110,7 +110,7 @@
   color: #fff;
 }
 
-#sum-toc {
+:is(#sum-toc, #exam-toc) {
   flex: none;
   border: 1.5px solid #d6ccb2;
   background: #fff;
@@ -122,7 +122,7 @@
   cursor: pointer;
 }
 
-#sum-progress {
+:is(#sum-progress, #exam-progress) {
   position: absolute;
   left: 0;
   right: 0;
@@ -133,7 +133,7 @@
   transform: scaleX(0);
 }
 
-#sum-article {
+:is(#sum-article, #exam-article) {
   max-width: 780px;
   margin: 0 auto;
   padding: 14px 10px 8px;
@@ -197,7 +197,7 @@
   letter-spacing: -0.01em;
 }
 
-#summary .hero-sub {
+:is(#summary, #exam) .hero-sub {
   margin: 0;
   font-size: 15px;
   line-height: 1.55;
@@ -224,7 +224,7 @@
   padding: 0 4px;
 }
 
-#summary h2 {
+:is(#summary, #exam) h2 {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -235,7 +235,7 @@
   letter-spacing: -0.01em;
 }
 
-#summary h2 .num {
+:is(#summary, #exam) h2 .num {
   flex: none;
   min-width: 30px;
   height: 30px;
@@ -249,7 +249,7 @@
   font-weight: 700;
 }
 
-#summary h3 {
+:is(#summary, #exam) h3 {
   display: flex;
   align-items: baseline;
   gap: 8px;
@@ -261,14 +261,14 @@
   font-weight: 700;
 }
 
-#summary h3 .num {
+:is(#summary, #exam) h3 .num {
   flex: none;
   color: #b0833a;
   font-size: 13px;
   font-weight: 700;
 }
 
-#summary h4 {
+:is(#summary, #exam) h4 {
   margin: 18px 0 4px;
   font-size: 14px;
   font-weight: 700;
@@ -276,20 +276,20 @@
   letter-spacing: 0.02em;
 }
 
-#summary p {
+:is(#summary, #exam) p {
   margin: 10px 0;
   line-height: 1.75;
   color: #333;
   overflow-wrap: anywhere;
 }
 
-#summary strong {
+:is(#summary, #exam) strong {
   font-weight: 700;
   color: #1c1c1c;
   background: linear-gradient(transparent 62%, rgba(255, 207, 70, 0.42) 62%);
 }
 
-#summary code {
+:is(#summary, #exam) code {
   background: #f6efdc;
   color: #8a3b12;
   border-radius: 6px;
@@ -297,20 +297,20 @@
   font-size: 0.88em;
 }
 
-#summary ul,
-#summary ol {
+:is(#summary, #exam) ul,
+:is(#summary, #exam) ol {
   list-style: none;
   margin: 8px 0;
   padding: 0;
 }
 
-#summary ul ul,
-#summary ol ul,
-#summary ul ol {
+:is(#summary, #exam) ul ul,
+:is(#summary, #exam) ol ul,
+:is(#summary, #exam) ul ol {
   margin: 4px 0 2px;
 }
 
-#summary li {
+:is(#summary, #exam) li {
   position: relative;
   padding-left: 20px;
   margin: 6px 0;
@@ -318,7 +318,7 @@
   overflow-wrap: anywhere;
 }
 
-#summary ul > li::before {
+:is(#summary, #exam) ul > li::before {
   content: "";
   position: absolute;
   left: 4px;
@@ -329,7 +329,7 @@
   background: #e8590c;
 }
 
-#summary ul ul > li::before {
+:is(#summary, #exam) ul ul > li::before {
   background: transparent;
   border: 2px solid #c9a24b;
   width: 6px;
@@ -337,16 +337,16 @@
   top: 0.72em;
 }
 
-#summary ol {
+:is(#summary, #exam) ol {
   counter-reset: item;
 }
 
-#summary ol > li {
+:is(#summary, #exam) ol > li {
   counter-increment: item;
   padding-left: 28px;
 }
 
-#summary ol > li::before {
+:is(#summary, #exam) ol > li::before {
   content: counter(item);
   position: absolute;
   left: 0;
@@ -362,12 +362,12 @@
   font-weight: 700;
 }
 
-#summary li.suppl {
+:is(#summary, #exam) li.suppl {
   color: #7a7260;
   font-size: 0.94em;
 }
 
-#summary li.suppl::before {
+:is(#summary, #exam) li.suppl::before {
   background: transparent !important;
   border: 2px dashed #c9bd9c !important;
 }
@@ -431,13 +431,13 @@
   -webkit-overflow-scrolling: touch;
 }
 
-#summary table {
+:is(#summary, #exam) table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13.5px;
 }
 
-#summary th {
+:is(#summary, #exam) th {
   padding: 10px 12px;
   text-align: left;
   background: #2b2b2b;
@@ -447,7 +447,7 @@
   overflow-wrap: anywhere;
 }
 
-#summary td {
+:is(#summary, #exam) td {
   padding: 10px 12px;
   border-top: 1px solid #eee7d4;
   vertical-align: top;
@@ -455,17 +455,17 @@
   overflow-wrap: anywhere;
 }
 
-#summary td code {
+:is(#summary, #exam) td code {
   white-space: normal;
   overflow-wrap: anywhere;
   word-break: break-all;
 }
 
-#summary tbody tr:nth-child(even) td {
+:is(#summary, #exam) tbody tr:nth-child(even) td {
   background: #fbf8ef;
 }
 
-#summary td:first-child {
+:is(#summary, #exam) td:first-child {
   font-weight: 700;
   color: #1c1c1c;
   min-width: 6em;
@@ -473,7 +473,7 @@
   overflow-wrap: normal;
 }
 
-#summary th:first-child {
+:is(#summary, #exam) th:first-child {
   min-width: 6em;
   word-break: keep-all;
   overflow-wrap: normal;
@@ -535,7 +535,7 @@
   border-radius: 0;
 }
 
-#summary .code-card pre code {
+:is(#summary, #exam) .code-card pre code {
   display: block;
   background: none;
   color: inherit;
@@ -704,7 +704,7 @@
   opacity: 0.38;
 }
 
-#summary .dg p,
+:is(#summary, #exam) .dg p,
 #dg-modal p {
   margin: 0;
   line-height: inherit;
@@ -712,19 +712,19 @@
   overflow-wrap: normal;
 }
 
-#summary .dg-svg path.flowchart-link,
+:is(#summary, #exam) .dg-svg path.flowchart-link,
 #dg-modal .dg-svg path.flowchart-link {
   stroke: #d8cdb0;
   stroke-width: 2.2px;
 }
 
-#summary .dg-svg .arrowheadPath,
+:is(#summary, #exam) .dg-svg .arrowheadPath,
 #dg-modal .dg-svg .arrowheadPath {
   fill: #ffd08a;
   stroke: #ffd08a;
 }
 
-#summary .dg-svg .cluster rect,
+:is(#summary, #exam) .dg-svg .cluster rect,
 #dg-modal .dg-svg .cluster rect {
   fill: rgba(255, 255, 255, 0.035);
   stroke: #6b6150;
@@ -734,11 +734,11 @@
   ry: 16px;
 }
 
-#summary .dg-svg g.node rect,
-#summary .dg-svg g.node polygon,
-#summary .dg-svg g.node path,
-#summary .dg-svg g.node circle,
-#summary .dg-svg g.node ellipse,
+:is(#summary, #exam) .dg-svg g.node rect,
+:is(#summary, #exam) .dg-svg g.node polygon,
+:is(#summary, #exam) .dg-svg g.node path,
+:is(#summary, #exam) .dg-svg g.node circle,
+:is(#summary, #exam) .dg-svg g.node ellipse,
 #dg-modal .dg-svg g.node rect,
 #dg-modal .dg-svg g.node polygon,
 #dg-modal .dg-svg g.node path,
@@ -749,25 +749,25 @@
   ry: 12px;
 }
 
-#summary .dg-svg g.node.dg-c0 :is(rect, polygon, path, circle, ellipse),
+:is(#summary, #exam) .dg-svg g.node.dg-c0 :is(rect, polygon, path, circle, ellipse),
 #dg-modal .dg-svg g.node.dg-c0 :is(rect, polygon, path, circle, ellipse) {
   fill: #3d2a18;
   stroke: #ff9a4d;
 }
 
-#summary .dg-svg g.node.dg-c1 :is(rect, polygon, path, circle, ellipse),
+:is(#summary, #exam) .dg-svg g.node.dg-c1 :is(rect, polygon, path, circle, ellipse),
 #dg-modal .dg-svg g.node.dg-c1 :is(rect, polygon, path, circle, ellipse) {
   fill: #183a2a;
   stroke: #4cc38a;
 }
 
-#summary .dg-svg g.node.dg-c2 :is(rect, polygon, path, circle, ellipse),
+:is(#summary, #exam) .dg-svg g.node.dg-c2 :is(rect, polygon, path, circle, ellipse),
 #dg-modal .dg-svg g.node.dg-c2 :is(rect, polygon, path, circle, ellipse) {
   fill: #1a2a42;
   stroke: #5aa2ff;
 }
 
-#summary .dg-svg g.node.dg-c3 :is(rect, polygon, path, circle, ellipse),
+:is(#summary, #exam) .dg-svg g.node.dg-c3 :is(rect, polygon, path, circle, ellipse),
 #dg-modal .dg-svg g.node.dg-c3 :is(rect, polygon, path, circle, ellipse) {
   fill: #2c2342;
   stroke: #a98bff;
@@ -799,7 +799,7 @@
 }
 
 :is(#summary, #dg-modal) .dg-svg .labelBox,
-#summary .dg-svg .note {
+:is(#summary, #exam) .dg-svg .note {
   stroke-width: 1.4px;
 }
 
@@ -857,7 +857,7 @@
   }
 }
 
-#sum-pager {
+:is(#sum-pager, #exam-pager) {
   display: flex;
   gap: 10px;
   max-width: 780px;
@@ -901,7 +901,7 @@
   color: #8a3b2f;
 }
 
-#sum-sheet {
+:is(#sum-sheet, #exam-sheet) {
   position: fixed;
   inset: 0;
   z-index: 90;
@@ -943,7 +943,7 @@
   cursor: pointer;
 }
 
-#sum-sheet-list {
+:is(#sum-sheet-list, #exam-sheet-list) {
   overflow-y: auto;
   padding: 4px 10px 14px;
 }
@@ -1049,11 +1049,11 @@
 }
 
 @media (min-width: 700px) {
-  #summary {
+  :is(#summary, #exam) {
     font-size: 16px;
   }
 
-  #sum-article {
+  :is(#sum-article, #exam-article) {
     padding-top: 22px;
   }
 

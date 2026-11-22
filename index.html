@@ -7,11 +7,13 @@
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/summary.css">
+<link rel="stylesheet" href="css/exam.css">
 </head>
 <body>
 <nav id="modes" aria-label="화면 전환">
   <button type="button" data-mode="cards" class="active">문제 카드</button>
   <button type="button" data-mode="summary">과목평가</button>
+  <button type="button" data-mode="exam">월말 평가</button>
 </nav>
 <div id="options"></div>
 <div id="filters"></div>
@@ -38,6 +40,21 @@
   <article id="sum-article"></article>
   <nav id="sum-pager"></nav>
 </section>
+<section id="exam" hidden aria-label="월말 평가">
+  <div id="exam-bar">
+    <div id="exam-title"></div>
+    <button id="exam-toc" type="button">☰ 목록</button>
+    <div id="exam-progress"></div>
+  </div>
+  <article id="exam-article"></article>
+  <nav id="exam-pager"></nav>
+</section>
+<div id="exam-sheet" hidden>
+  <div class="sheet-panel">
+    <div class="sheet-head"><span>월말 평가 목록</span><button id="exam-sheet-close" type="button">닫기</button></div>
+    <div id="exam-sheet-list"></div>
+  </div>
+</div>
 <div id="sum-sheet" hidden>
   <div class="sheet-panel">
     <div class="sheet-head"><span>목차</span><button id="sum-sheet-close" type="button">닫기</button></div>

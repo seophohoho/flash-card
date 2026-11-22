@@ -24,6 +24,18 @@ node --test
 
 상단의 "과목평가" 버튼을 누르면 `summary/flink_summary.md`와 `summary/spark_summary.md`를 읽어 요약본 화면으로 바꾼다. 마크다운은 `js/markdown.js`가 직접 해석하고, 다이어그램(mermaid)은 `vendor/mermaid.min.js`(11.17.2)가 그린다. 이 파일은 요약본을 열 때만 불러온다. 요약본을 고치려면 해당 과목 파일(`summary/flink_summary.md`, `summary/spark_summary.md`)을 수정한다. 각 파일은 `# ` 제목마다 한 편으로 나뉘고, 편은 flink 1편 뒤에 spark 1편 순서로 이어진다. `#summary-2`처럼 주소 끝에 붙이면 해당 편으로 바로 열린다.
 
+## 월말 평가
+
+상단의 "월말 평가" 버튼은 `exam/exam.json`을 읽어 실습·과제 42개를 한 문제씩 보여 준다. 정답이 채워진 코드(빈칸 정답은 노란색), 실행 출력, 핵심 개념을 읽기만 하는 화면이다. `#exam-3`처럼 주소 끝에 붙이면 해당 문제로 바로 열린다.
+
+`exam/exam.json`은 `ws_hw/`에서 만든다. 문제를 고치면 다시 만든다.
+
+```bash
+node scripts/build-exam.js
+```
+
+경로를 바꾸려면 `node scripts/build-exam.js <ws_hw 경로> <출력 json 경로>`.
+
 ## 문제 파일
 
 `questions.json`의 모양과 규칙은 [questions-format.md](questions-format.md)를 본다.

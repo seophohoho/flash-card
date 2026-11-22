@@ -38,7 +38,7 @@ export function renderInline(parent, text) {
   }
 }
 
-function renderList(list) {
+export function renderList(list) {
   const root = el(list.ordered ? "ol" : "ul");
   for (const item of list.items) {
     const li = el("li");
@@ -50,7 +50,7 @@ function renderList(list) {
   return root;
 }
 
-function renderTable(block) {
+export function renderTable(block) {
   const wrap = el("div", "table-wrap");
   const table = el("table");
   const thead = el("thead");
@@ -77,7 +77,7 @@ function renderTable(block) {
   return wrap;
 }
 
-function renderCode(block) {
+export function renderCode(block) {
   const box = el("div", "code-card");
   const head = el("div", "code-head");
   head.appendChild(el("span", "dot"));
